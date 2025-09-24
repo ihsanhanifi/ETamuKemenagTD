@@ -42,7 +42,7 @@
     }
 
     .container {
-      max-width: 480px;
+      max-width: 500px;
       width: 100%;
       background: var(--input-bg);
       border-radius: 14px;
@@ -53,7 +53,7 @@
 
     @media (min-width: 768px) {
       .container {
-        max-width: 600px;
+        max-width: 720px;
         padding: 3rem 3.5rem 4rem;
       }
     }
@@ -178,6 +178,22 @@
       line-height: 1.45;
     }
 
+    /* Grid layout for inputs */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.375rem;
+    }
+
+    @media (min-width: 640px) {
+      /* Two columns for larger screens */
+      .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.75rem 2rem;
+      }
+    }
+
+    /* Radio group flex & responsive */
     .radio-group {
       display: flex;
       gap: 1rem;
@@ -229,6 +245,7 @@
       box-shadow: inset 0 0 14px var(--shadow-light);
     }
 
+    /* Submit button */
     button.submit-btn {
       width: 100%;
       background: var(--primary-blue);
@@ -248,6 +265,7 @@
       gap: 0.75rem;
       user-select: none;
       user-drag: none;
+      margin-top: 2rem;
     }
 
     button.submit-btn:hover:not(:disabled) {
@@ -285,7 +303,7 @@
     }
 
     footer {
-      margin-top: 2.5rem;
+      margin-top: 3rem;
       font-size: 0.875rem;
       font-weight: 500;
       color: #64748b;
@@ -373,114 +391,116 @@
       <p class="form-description">Silakan mengisi data diri dengan lengkap dan benar</p>
 
       <form id="guestBookForm" novalidate>
-        <div>
-          <label for="nama">
-            <i class="fas fa-user mr-2 text-blue-600"></i>Nama Lengkap *
-          </label>
-          <input
-            type="text"
-            id="nama"
-            name="nama"
-            placeholder="Masukkan nama lengkap sesuai KTP"
-            required
-            class="input-field"
-            autocomplete="name"
-          />
-        </div>
+        <div class="form-grid">
+          <div>
+            <label for="nama">
+              <i class="fas fa-user mr-2 text-blue-600"></i>Nama Lengkap *
+            </label>
+            <input
+              type="text"
+              id="nama"
+              name="nama"
+              placeholder="Masukkan nama lengkap sesuai KTP"
+              required
+              class="input-field"
+              autocomplete="name"
+            />
+          </div>
 
-        <div>
-          <span class="field-label">
-            <i class="fas fa-building mr-2 text-blue-600"></i>Berasal dari *
-          </span>
-          <div class="radio-group" role="radiogroup" aria-required="true" aria-labelledby="asal-label">
-            <div class="radio-card" onclick="selectRadio('instansi')">
-              <label>
-                <input type="radio" name="asal" value="Instansi" required aria-checked="false" />
-                Instansi/Pemerintahan
-              </label>
-            </div>
-            <div class="radio-card" onclick="selectRadio('umum')">
-              <label>
-                <input type="radio" name="asal" value="Umum" aria-checked="false" />
-                Umum/Masyarakat
-              </label>
+          <div>
+            <span class="field-label">
+              <i class="fas fa-building mr-2 text-blue-600"></i>Berasal dari *
+            </span>
+            <div class="radio-group" role="radiogroup" aria-required="true" aria-labelledby="asal-label">
+              <div class="radio-card" onclick="selectRadio('instansi')">
+                <label>
+                  <input type="radio" name="asal" value="Instansi" required aria-checked="false" />
+                  Instansi/Pemerintahan
+                </label>
+              </div>
+              <div class="radio-card" onclick="selectRadio('umum')">
+                <label>
+                  <input type="radio" name="asal" value="Umum" aria-checked="false" />
+                  Umum/Masyarakat
+                </label>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div id="instansiField" class="hidden">
-          <label for="namaInstansi">
-            <i class="fas fa-university mr-2 text-blue-600"></i>Nama Instansi *
-          </label>
-          <input
-            type="text"
-            id="namaInstansi"
-            name="namaInstansi"
-            placeholder="Masukkan nama instansi lengkap"
-            class="input-field"
-          />
-        </div>
+          <div id="instansiField" class="hidden">
+            <label for="namaInstansi">
+              <i class="fas fa-university mr-2 text-blue-600"></i>Nama Instansi *
+            </label>
+            <input
+              type="text"
+              id="namaInstansi"
+              name="namaInstansi"
+              placeholder="Masukkan nama instansi lengkap"
+              class="input-field"
+            />
+          </div>
 
-        <div>
-          <label for="tujuanKantor">
-            <i class="fas fa-target mr-2 text-blue-600"></i>Tujuan ke Kantor Kemenag Tanah Datar *
-          </label>
-          <textarea
-            id="tujuanKantor"
-            name="tujuanKantor"
-            rows="3"
-            placeholder="Jelaskan secara detail tujuan kunjungan Anda ke kantor"
-            required
-            class="input-field"
-          ></textarea>
-        </div>
+          <div>
+            <label for="tujuanKantor">
+              <i class="fas fa-target mr-2 text-blue-600"></i>Tujuan ke Kantor Kemenag Tanah Datar *
+            </label>
+            <textarea
+              id="tujuanKantor"
+              name="tujuanKantor"
+              rows="3"
+              placeholder="Jelaskan secara detail tujuan kunjungan Anda ke kantor"
+              required
+              class="input-field"
+            ></textarea>
+          </div>
 
-        <div>
-          <label for="tujuanPengurusan">
-            <i class="fas fa-tasks mr-2 text-blue-600"></i>Tujuan Pengurusan *
-          </label>
-          <select id="tujuanPengurusan" name="tujuanPengurusan" class="input-field" required>
-            <option value="">Pilih tujuan pengurusan</option>
-            <option value="Kakan Kemenag">Kakan Kemenag</option>
-            <option value="Kasubag">Kasubag</option>
-            <option value="Kepegawaian">Kepegawaian</option>
-            <option value="Keuangan">Keuangan</option>
-            <option value="Seksi PAIS">Seksi PAIS</option>
-            <option value="Seksi PONTREN">Seksi PONTREN</option>
-            <option value="Seksi BIMAS">Seksi BIMAS</option>
-            <option value="Seksi PENMAD">Seksi PENMAD</option>
-            <option value="Seksi Haji dan Umroh (PHU)">Seksi Haji dan Umroh (PHU)</option>
-            <option value="Seksi ZAWA">Seksi ZAWA</option>
-          </select>
-        </div>
+          <div>
+            <label for="tujuanPengurusan">
+              <i class="fas fa-tasks mr-2 text-blue-600"></i>Tujuan Pengurusan *
+            </label>
+            <select id="tujuanPengurusan" name="tujuanPengurusan" class="input-field" required>
+              <option value="">Pilih tujuan pengurusan</option>
+              <option value="Kakan Kemenag">Kakan Kemenag</option>
+              <option value="Kasubag">Kasubag</option>
+              <option value="Kepegawaian">Kepegawaian</option>
+              <option value="Keuangan">Keuangan</option>
+              <option value="Seksi PAIS">Seksi PAIS</option>
+              <option value="Seksi PONTREN">Seksi PONTREN</option>
+              <option value="Seksi BIMAS">Seksi BIMAS</option>
+              <option value="Seksi PENMAD">Seksi PENMAD</option>
+              <option value="Seksi Haji dan Umroh (PHU)">Seksi Haji dan Umroh (PHU)</option>
+              <option value="Seksi ZAWA">Seksi ZAWA</option>
+            </select>
+          </div>
 
-        <div>
-          <label for="noHp">
-            <i class="fas fa-phone mr-2 text-blue-600"></i>No. Handphone/WhatsApp *
-          </label>
-          <input
-            type="tel"
-            id="noHp"
-            name="noHp"
-            placeholder="Contoh: 081234567890"
-            required
-            class="input-field"
-            autocomplete="tel"
-          />
-        </div>
+          <div>
+            <label for="noHp">
+              <i class="fas fa-phone mr-2 text-blue-600"></i>No. Handphone/WhatsApp *
+            </label>
+            <input
+              type="tel"
+              id="noHp"
+              name="noHp"
+              placeholder="Contoh: 081234567890"
+              required
+              class="input-field"
+              autocomplete="tel"
+            />
+          </div>
 
-        <div>
-          <label for="alamat">
-            <i class="fas fa-map-marker-alt mr-2 text-blue-600"></i>Alamat *
-          </label>
-          <textarea
-            id="alamat"
-            name="alamat"
-            rows="3"
-            placeholder="Masukkan alamat lengkap"
-            required
-            class="input-field"
-          ></textarea>
+          <div>
+            <label for="alamat">
+              <i class="fas fa-map-marker-alt mr-2 text-blue-600"></i>Alamat *
+            </label>
+            <textarea
+              id="alamat"
+              name="alamat"
+              rows="3"
+              placeholder="Masukkan alamat lengkap"
+              required
+              class="input-field"
+            ></textarea>
+          </div>
         </div>
 
         <button type="submit" class="submit-btn" id="submitBtn">
