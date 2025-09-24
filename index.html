@@ -8,19 +8,23 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap");
 
     :root {
-      --primary-blue: #3b82f6;
-      --secondary-blue: #2563eb;
-      --light-blue: #dbeafe;
-      --dark-blue: #1e40af;
-      --bg-gray: #f9fafb;
-      --input-bg: #ffffff;
-      --border-gray: #d1d5db;
-      --shadow-light: rgba(59, 130, 246, 0.15);
-      --error-red: #ef4444;
-      --success-green: #22c55e;
+      --primary-pink: #ff81a8;
+      --primary-purple: #a66cff;
+      --primary-blue: #6cb8ff;
+      --primary-green: #8de7a6;
+      --bg-light: #faf8f7;
+      --bg-white: #ffffff;
+      --text-dark: #3c3a45;
+      --text-muted: #8a8d93;
+      --border-gray: #dcd6d6;
+      --shadow-light: rgba(172, 152, 202, 0.2);
+      --error-red: #ff5c5c;
+      --success-green: #4ad994;
+      --radius-lg: 1.25rem;
+      --radius-full: 9999px;
     }
 
     * {
@@ -28,121 +32,116 @@
       padding: 0;
       box-sizing: border-box;
       font-family: "Inter", sans-serif;
-    }
-
-    body {
-      background: var(--bg-gray);
-      min-height: 100vh;
-      padding: 1.5rem 1rem 2.5rem;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
+    body {
+      background: var(--bg-light);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem 1rem 3rem;
+      color: var(--text-dark);
+    }
+
     .container {
-      background: var(--input-bg);
+      background: var(--bg-white);
       width: 100%;
-      max-width: 420px;
-      border-radius: 20px;
-      box-shadow: 0 12px 32px var(--shadow-light);
-      padding: 2.75rem 2.25rem 3.5rem;
-      margin-bottom: 2rem;
+      max-width: 460px;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 16px 40px var(--shadow-light);
+      padding: 3rem 3rem 4rem;
       user-select: none;
-      -webkit-user-select: none;
-      -webkit-touch-callout: none;
     }
 
     .header-gradient {
-      background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
-      border-radius: 20px;
-      padding: 1.5rem 1rem 2rem;
+      background: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.5rem 3rem;
       color: #fff;
       text-align: center;
-      box-shadow: 0 10px 30px var(--shadow-light);
-      margin-bottom: 2rem;
+      box-shadow: 0 12px 30px var(--shadow-light);
+      margin-bottom: 2.5rem;
       user-select: none;
     }
 
     .logo-container {
-      width: 110px;
-      height: 110px;
-      margin: 0 auto 1.25rem;
-      background: rgba(255, 255, 255, 0.22);
-      border-radius: 50%;
-      padding: 14px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.28);
-      backdrop-filter: blur(10px);
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 1.75rem;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: var(--radius-full);
+      padding: 16px;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(12px);
       transition: transform 0.3s ease;
-      -webkit-tap-highlight-color: transparent;
+      cursor: default;
     }
 
     .logo-container img {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      display: block;
+      border-radius: var(--radius-full);
       user-select: none;
       pointer-events: none;
-      border-radius: 50%;
     }
 
     .logo-container:hover {
-      transform: scale(1.07);
+      transform: scale(1.1);
     }
 
     .header-gradient h1 {
       font-weight: 800;
-      font-size: 1.5rem;
-      line-height: 1.2;
-      margin-bottom: 0.375rem;
-      letter-spacing: 1.3px;
-      text-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24);
+      font-size: 1.8rem;
+      letter-spacing: 1.6px;
+      margin-bottom: 0.4rem;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.26);
     }
 
     .header-gradient h2 {
       font-weight: 600;
-      font-size: 1.125rem;
-      margin-bottom: 0.5rem;
-      letter-spacing: 0.6px;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      font-size: 1.25rem;
+      margin-bottom: 0.65rem;
+      letter-spacing: 0.8px;
+      text-shadow: 0 1.2px 4px rgba(0, 0, 0, 0.22);
     }
 
     .header-gradient p {
-      font-size: 0.85rem;
-      opacity: 0.9;
-      letter-spacing: 0.3px;
-      user-select: none;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      letter-spacing: 0.35px;
     }
 
     h2.form-title {
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       font-weight: 700;
-      color: #334155;
+      color: var(--text-dark);
       text-align: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.8rem;
       user-select: none;
-      padding: 0 0.3rem;
     }
 
     p.form-description {
       text-align: center;
-      margin-bottom: 2rem;
-      color: #64748b;
-      font-size: 1rem;
+      margin-bottom: 2.2rem;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
       user-select: none;
-      line-height: 1.5;
-      padding: 0 0.5rem;
+      padding: 0 0.4rem;
     }
 
+    /* Form fields */
     label,
     legend,
     span.field-label {
       display: block;
-      font-weight: 700;
-      font-size: 1rem;
-      color: #475569;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text-dark);
       margin-bottom: 0.5rem;
       user-select: none;
     }
@@ -150,61 +149,58 @@
     .input-field,
     select,
     textarea {
-      background: var(--input-bg);
-      border: 2px solid var(--border-gray);
-      border-radius: 20px;
-      font-size: 1.1rem;
-      padding: 0.85rem 1.2rem;
+      background: var(--bg-white);
+      border: 2.5px solid var(--border-gray);
+      border-radius: var(--radius-lg);
+      font-size: 1.15rem;
+      padding: 1rem 1.5rem;
       width: 100%;
       resize: vertical;
-      box-shadow: none;
-      transition: border-color 0.35s ease, box-shadow 0.3s ease;
-      outline-offset: 3px;
-      color: #334155;
+      color: var(--text-dark);
       font-weight: 600;
-      user-select: text;
-      caret-color: var(--primary-blue);
-      font-family: inherit;
+      caret-color: var(--primary-purple);
       box-sizing: border-box;
+      transition: border-color 0.35s ease, box-shadow 0.35s ease;
+      outline-offset: 4px;
+      font-family: inherit;
     }
 
     .input-field:focus,
     select:focus,
     textarea:focus {
-      border-color: var(--primary-blue);
-      box-shadow: 0 0 16px var(--light-blue);
+      border-color: var(--primary-purple);
+      box-shadow: 0 0 25px var(--primary-purple);
       outline: none;
     }
 
     textarea {
-      min-height: 100px;
-      border-radius: 20px;
+      min-height: 120px;
       line-height: 1.6;
       font-weight: 600;
     }
 
-    /* Single-column mobile-friendly layout */
+    /* Mobile-friendly single-column spacing */
     form#guestBookForm .form-group,
     form#guestBookForm > div {
-      margin-bottom: 1.75rem;
+      margin-bottom: 2rem;
     }
 
     /* Radio group */
     .radio-group {
       display: flex;
-      gap: 1rem;
-      margin-top: 0.6rem;
+      gap: 1.2rem;
+      margin-top: 0.8rem;
       user-select: none;
       flex-wrap: nowrap;
       overflow-x: auto;
-      padding-bottom: 0.35rem;
+      padding-bottom: 0.5rem;
       -webkit-overflow-scrolling: touch;
     }
 
-    /* Scrollbar hidden but still scrollable on mobile */
     .radio-group::-webkit-scrollbar {
       display: none;
     }
+
     .radio-group {
       -ms-overflow-style: none;
       scrollbar-width: none;
@@ -212,98 +208,95 @@
 
     .radio-card {
       flex: 0 0 auto;
-      padding: 16px 20px;
-      border: 2px solid var(--border-gray);
-      border-radius: 24px;
-      background: var(--input-bg);
+      padding: 18px 24px;
+      border: 2.5px solid var(--border-gray);
+      border-radius: 2.5rem;
+      background: var(--bg-white);
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.2rem;
       cursor: pointer;
       font-weight: 700;
-      font-size: 1.1rem;
-      color: #475569;
+      font-size: 1.15rem;
+      color: var(--text-dark);
       transition: all 0.3s ease;
       user-select: none;
       user-drag: none;
-      box-shadow: inset 0 0 8px transparent;
-      -webkit-tap-highlight-color: transparent;
+      box-shadow: inset 0 0 10px transparent;
       white-space: nowrap;
     }
 
     .radio-card input[type="radio"] {
-      accent-color: var(--primary-blue);
+      accent-color: var(--primary-pink);
       cursor: pointer;
-      user-select: none;
-      user-drag: none;
-      height: 24px;
-      width: 24px;
+      height: 28px;
+      width: 28px;
       margin: 0;
     }
 
     .radio-card:hover,
     .radio-card:focus-within {
-      border-color: var(--primary-blue);
-      background: var(--light-blue);
-      box-shadow: inset 0 0 12px var(--shadow-light);
-      color: var(--dark-blue);
+      border-color: var(--primary-pink);
+      background: #ffe8f0;
+      box-shadow: inset 0 0 20px rgba(255, 129, 168, 0.25);
+      color: var(--primary-pink);
     }
 
     .radio-card.selected {
-      border-color: var(--primary-blue);
-      background: var(--light-blue);
-      color: var(--dark-blue);
-      box-shadow: inset 0 0 18px var(--shadow-light);
+      border-color: var(--primary-pink);
+      background: #ffbfd1;
+      box-shadow: inset 0 0 25px rgba(255, 129, 168, 0.4);
+      color: var(--primary-pink);
     }
 
+    /* Submit button */
     button.submit-btn {
       width: 100%;
-      background: var(--primary-blue);
-      color: #fff;
+      background: linear-gradient(90deg, var(--primary-pink), var(--primary-purple));
+      color: var(--bg-white);
       font-weight: 800;
-      font-size: 1.25rem;
-      padding: 1.2rem 0;
+      font-size: 1.3rem;
+      padding: 1.3rem 0;
       border: none;
-      border-radius: 28px;
+      border-radius: 2rem;
       cursor: pointer;
-      letter-spacing: 1.2px;
-      box-shadow: 0 14px 36px var(--shadow-light);
-      transition: background 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+      letter-spacing: 1.3px;
+      box-shadow: 0 16px 44px rgba(255, 129, 168, 0.4);
+      transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
         box-shadow 0.3s ease, transform 0.2s ease;
       display: flex;
       justify-content: center;
       align-items: center;
       user-select: none;
-      user-drag: none;
-      gap: 1rem;
-      margin-top: 2.5rem;
-      -webkit-tap-highlight-color: transparent;
+      gap: 1.2rem;
+      margin-top: 3rem;
     }
 
     button.submit-btn:hover:not(:disabled),
     button.submit-btn:focus-visible:not(:disabled) {
-      background: var(--secondary-blue);
-      box-shadow: 0 18px 38px var(--dark-blue);
-      transform: translateY(-3px);
-      outline-offset: 4px;
-      outline: 3px solid var(--secondary-blue);
+      background: linear-gradient(90deg, var(--primary-purple), var(--primary-pink));
+      box-shadow: 0 20px 48px rgba(166, 108, 255, 0.5);
+      transform: translateY(-4px);
+      outline-offset: 5px;
+      outline: 3px solid var(--primary-purple);
     }
 
     button.submit-btn:disabled {
-      background: #a1a1aa;
+      background: #e7cbd9;
       box-shadow: none;
       cursor: not-allowed;
       transform: none;
       outline: none;
     }
 
+    /* Loading spinner */
     .loading-spinner {
-      border: 4px solid #dbeafe;
-      border-top: 4px solid var(--input-bg);
+      border: 4.5px solid #f7eafc;
+      border-top: 4.5px solid var(--primary-pink);
       border-radius: 50%;
-      width: 26px;
-      height: 26px;
-      animation: spin 1.2s linear infinite;
+      width: 28px;
+      height: 28px;
+      animation: spin 1.3s linear infinite;
       user-select: none;
       user-drag: none;
     }
@@ -318,17 +311,17 @@
       }
     }
 
+    /* Footer */
     footer {
-      margin-top: 4rem;
+      margin-top: 5rem;
       font-size: 1rem;
       font-weight: 600;
-      color: #64748b;
+      color: var(--text-muted);
       text-align: center;
       user-select: none;
-      user-drag: none;
-      letter-spacing: 0.35px;
-      line-height: 1.6;
-      padding: 0 1rem;
+      letter-spacing: 0.4px;
+      line-height: 1.65;
+      padding: 0 1.2rem;
     }
 
     /* Modal */
@@ -339,7 +332,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 50;
+      z-index: 100;
       opacity: 1;
       transition: opacity 0.4s ease;
       user-select: none;
@@ -352,46 +345,53 @@
     }
 
     .modal-content {
-      background: #fff;
-      border-radius: 28px;
-      padding: 3rem 3.25rem 3.5rem;
-      max-width: 420px;
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: 3.5rem 4rem 4rem;
+      max-width: 460px;
       width: 90%;
       text-align: center;
-      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22);
       user-select: none;
-      user-drag: none;
+      transform: translateY(0);
       transition: transform 0.35s ease;
+      outline: none;
     }
 
     .modal-icon {
-      font-size: 5rem;
-      margin-bottom: 1.75rem;
-      color: var(--success-green);
+      font-size: 5.8rem;
+      margin-bottom: 2rem;
+    }
+
+    .modal-icon.text-success-green {
+      color: var(--primary-green);
+    }
+
+    .modal-icon.text-error-red {
+      color: var(--error-red);
     }
 
     .modal-btn {
-      margin-top: 2.5rem;
-      padding: 1.1rem 4rem;
-      background: var(--primary-blue);
-      color: #fff;
-      border-radius: 30px;
+      margin-top: 3rem;
+      padding: 1.3rem 5rem;
+      background: var(--primary-purple);
+      color: var(--bg-white);
+      border-radius: 2.5rem;
       font-weight: 800;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       cursor: pointer;
       border: none;
-      letter-spacing: 1.25px;
+      letter-spacing: 1.5px;
       user-select: none;
-      user-drag: none;
       transition: background-color 0.3s ease;
       -webkit-tap-highlight-color: transparent;
+      outline-offset: 5px;
     }
 
     .modal-btn:hover,
     .modal-btn:focus-visible {
-      background: var(--secondary-blue);
-      outline-offset: 5px;
-      outline: 4px solid var(--secondary-blue);
+      background: var(--primary-pink);
+      outline: 4px solid var(--primary-pink);
     }
   </style>
 </head>
@@ -413,13 +413,13 @@
 
       <form id="guestBookForm" novalidate>
         <div class="form-group">
-          <label for="nama"><i class="fas fa-user mr-2 text-blue-600"></i>Nama Lengkap *</label>
+          <label for="nama"><i class="fas fa-user mr-2" style="color:#ff81a8;"></i>Nama Lengkap *</label>
           <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap sesuai KTP" required
             class="input-field" autocomplete="name" />
         </div>
 
         <div class="form-group">
-          <span class="field-label"><i class="fas fa-building mr-2 text-blue-600"></i>Berasal dari *</span>
+          <span class="field-label"><i class="fas fa-building mr-2" style="color:#ff81a8;"></i>Berasal dari *</span>
           <div class="radio-group" role="radiogroup" aria-required="true" aria-labelledby="asal-label">
             <div class="radio-card" onclick="selectRadio('instansi')">
               <label>
@@ -437,20 +437,20 @@
         </div>
 
         <div class="form-group hidden" id="instansiField">
-          <label for="namaInstansi"><i class="fas fa-university mr-2 text-blue-600"></i>Nama Instansi *</label>
+          <label for="namaInstansi"><i class="fas fa-university mr-2" style="color:#ff81a8;"></i>Nama Instansi *</label>
           <input type="text" id="namaInstansi" name="namaInstansi" placeholder="Masukkan nama instansi lengkap"
             class="input-field" />
         </div>
 
         <div class="form-group">
-          <label for="tujuanKantor"><i class="fas fa-target mr-2 text-blue-600"></i>Tujuan ke Kantor Kemenag Tanah
+          <label for="tujuanKantor"><i class="fas fa-target mr-2" style="color:#ff81a8;"></i>Tujuan ke Kantor Kemenag Tanah
             Datar *</label>
           <textarea id="tujuanKantor" name="tujuanKantor" rows="3"
             placeholder="Jelaskan secara detail tujuan kunjungan Anda ke kantor" required class="input-field"></textarea>
         </div>
 
         <div class="form-group">
-          <label for="tujuanPengurusan"><i class="fas fa-tasks mr-2 text-blue-600"></i>Tujuan Pengurusan *</label>
+          <label for="tujuanPengurusan"><i class="fas fa-tasks mr-2" style="color:#ff81a8;"></i>Tujuan Pengurusan *</label>
           <select id="tujuanPengurusan" name="tujuanPengurusan" class="input-field" required>
             <option value="">Pilih tujuan pengurusan</option>
             <option value="Kakan Kemenag">Kakan Kemenag</option>
@@ -467,13 +467,13 @@
         </div>
 
         <div class="form-group">
-          <label for="noHp"><i class="fas fa-phone mr-2 text-blue-600"></i>No. Handphone/WhatsApp *</label>
+          <label for="noHp"><i class="fas fa-phone mr-2" style="color:#ff81a8;"></i>No. Handphone/WhatsApp *</label>
           <input type="tel" id="noHp" name="noHp" placeholder="Contoh: 081234567890" required class="input-field"
             autocomplete="tel" />
         </div>
 
         <div class="form-group">
-          <label for="alamat"><i class="fas fa-map-marker-alt mr-2 text-blue-600"></i>Alamat *</label>
+          <label for="alamat"><i class="fas fa-map-marker-alt mr-2" style="color:#ff81a8;"></i>Alamat *</label>
           <textarea id="alamat" name="alamat" rows="3" placeholder="Masukkan alamat lengkap" required
             class="input-field"></textarea>
         </div>
