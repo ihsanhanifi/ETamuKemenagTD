@@ -59,25 +59,28 @@
     .header-gradient {
       background: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
       border-radius: var(--radius-lg);
-      padding: 2rem 1.5rem 3rem;
+      padding: 2.5rem 2rem 3.5rem;
       color: #fff;
       text-align: center;
-      box-shadow: 0 12px 30px var(--shadow-light);
-      margin-bottom: 2.5rem;
+      box-shadow: 0 16px 48px var(--shadow-light);
+      margin-bottom: 3rem;
       user-select: none;
+      position: relative;
+      overflow: hidden;
     }
 
     .logo-container {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 1.75rem;
-      background: rgba(255, 255, 255, 0.25);
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 2rem;
+      background: rgba(255, 255, 255, 0.35);
       border-radius: var(--radius-full);
-      padding: 16px;
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.35);
-      backdrop-filter: blur(12px);
-      transition: transform 0.3s ease;
+      padding: 18px;
+      box-shadow: 0 0 35px rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(14px);
+      transition: transform 0.35s ease;
       cursor: default;
+      border: 3px solid rgba(255, 255, 255, 0.5);
     }
 
     .logo-container img {
@@ -90,29 +93,70 @@
     }
 
     .logo-container:hover {
-      transform: scale(1.1);
+      transform: scale(1.12) rotate(3deg);
+    }
+
+    .header-gradient::before,
+    .header-gradient::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+
+    .header-gradient::before {
+      width: 120px;
+      height: 120px;
+      background: rgba(255, 129, 168, 0.35);
+      top: -40px;
+      left: -40px;
+      filter: blur(40px);
+    }
+
+    .header-gradient::after {
+      width: 180px;
+      height: 180px;
+      background: rgba(166, 108, 255, 0.35);
+      bottom: -60px;
+      right: -60px;
+      filter: blur(50px);
     }
 
     .header-gradient h1 {
-      font-weight: 800;
-      font-size: 1.8rem;
-      letter-spacing: 1.6px;
-      margin-bottom: 0.4rem;
-      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.26);
+      font-weight: 900;
+      font-size: 2rem;
+      letter-spacing: 1.9px;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+      text-transform: uppercase;
     }
 
     .header-gradient h2 {
-      font-weight: 600;
-      font-size: 1.25rem;
-      margin-bottom: 0.65rem;
-      letter-spacing: 0.8px;
-      text-shadow: 0 1.2px 4px rgba(0, 0, 0, 0.22);
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 0.85rem;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 7px rgba(0, 0, 0, 0.28);
+    }
+
+    .header-gradient h2::after {
+      content: "";
+      display: block;
+      width: 60px;
+      margin: 8px auto 0;
+      height: 2.5px;
+      background: rgba(255, 255, 255, 0.65);
+      border-radius: 2px;
     }
 
     .header-gradient p {
-      font-size: 0.9rem;
-      opacity: 0.85;
-      letter-spacing: 0.35px;
+      font-size: 1rem;
+      opacity: 0.95;
+      letter-spacing: 0.4px;
+      font-weight: 500;
+      user-select: none;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.12);
     }
 
     h2.form-title {
@@ -134,7 +178,6 @@
       padding: 0 0.4rem;
     }
 
-    /* Form fields */
     label,
     legend,
     span.field-label {
@@ -179,13 +222,11 @@
       font-weight: 600;
     }
 
-    /* Mobile-friendly single-column spacing */
     form#guestBookForm .form-group,
     form#guestBookForm > div {
       margin-bottom: 2rem;
     }
 
-    /* Radio group */
     .radio-group {
       display: flex;
       gap: 1.2rem;
@@ -249,7 +290,6 @@
       color: var(--primary-pink);
     }
 
-    /* Submit button */
     button.submit-btn {
       width: 100%;
       background: linear-gradient(90deg, var(--primary-pink), var(--primary-purple));
@@ -289,7 +329,6 @@
       outline: none;
     }
 
-    /* Loading spinner */
     .loading-spinner {
       border: 4.5px solid #f7eafc;
       border-top: 4.5px solid var(--primary-pink);
@@ -311,7 +350,6 @@
       }
     }
 
-    /* Footer */
     footer {
       margin-top: 5rem;
       font-size: 1rem;
@@ -324,7 +362,6 @@
       padding: 0 1.2rem;
     }
 
-    /* Modal */
     .modal-bg {
       background: rgba(0, 0, 0, 0.45);
       position: fixed;
