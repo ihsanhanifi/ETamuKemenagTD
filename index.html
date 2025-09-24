@@ -1,585 +1,705 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buku Tamu Digital - Kementerian Agama Kabupaten Tanah Datar</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        :root {
-            --primary-blue: #1e3a8a;
-            --secondary-blue: #1d4ed8;
-            --light-blue: #dbeafe;
-            --dark-blue: #1e40af;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .header-gradient {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
-        }
-        
-        .form-container {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            border: 1px solid #e5e7eb;
-        }
-        
-        .form-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
-        
-        .input-field {
-            border: 2px solid #e2e8f0;
-            transition: all 0.3s ease;
-            border-radius: 10px;
-            font-size: 16px;
-        }
-        
-        .input-field:focus {
-            border-color: var(--secondary-blue);
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-            outline: none;
-        }
-        
-        .submit-btn {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
-            transition: all 0.3s ease;
-            border-radius: 10px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        
-        .submit-btn:hover {
-            background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--dark-blue) 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
-        }
-        
-        .submit-btn:disabled {
-            background: #9ca3af;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        
-        .success-modal, .error-modal {
-            animation: slideDown 0.5s ease;
-        }
-        
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .logo-container {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.1) 100%);
-            border-radius: 12px;
-            padding: 25px;
-            backdrop-filter: blur(10px);
-        }
-        
-        .loading-spinner {
-            border: 2px solid #f3f3f3;
-            border-top: 2px solid #3498db;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .radio-card {
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .radio-card:hover {
-            border-color: var(--secondary-blue);
-            transform: translateY(-2px);
-        }
-        
-        .radio-card.selected {
-            border-color: var(--secondary-blue);
-            background-color: var(--light-blue);
-        }
-        
-        .form-step {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .form-step.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .step-indicator {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-        
-        .step-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #e5e7eb;
-            margin: 0 6px;
-            transition: all 0.3s ease;
-        }
-        
-        .step-dot.active {
-            background: var(--secondary-blue);
-            transform: scale(1.2);
-        }
-        
-        .form-navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-        
-        .nav-btn {
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-prev {
-            background: #f3f4f6;
-            color: #374151;
-        }
-        
-        .btn-prev:hover {
-            background: #e5e7eb;
-        }
-        
-        .btn-next {
-            background: var(--secondary-blue);
-            color: white;
-        }
-        
-        .btn-next:hover {
-            background: var(--dark-blue);
-        }
-    </style>
-</head>
-<body class="min-h-screen flex items-center justify-center py-8">
-    <div class="w-full max-w-4xl mx-4">
-        <!-- Header dengan Logo Kemenag -->
-        <div class="header-gradient text-white rounded-2xl p-8 text-center mb-8 shadow-xl">
-            <div class="logo-container inline-block mb-6">
-                <img src="LKTD.png" alt="Logo resmi Kementerian Agama Republik Indonesia dengan simbol bintang, padi kapas, dan globe berwarna putih di atas latar biru" class="mx-auto" />
-            </div>
-            <h1 class="text-3xl font-bold mb-3">KEMENTERIAN AGAMA REPUBLIK INDONESIA</h1>
-            <h2 class="text-xl font-semibold mb-2">KANTOR KABUPATEN TANAH DATAR</h2>
-            <p class="text-sm opacity-90">Jl. M.Yamin Bukit Gombak Batusangkar, Tanah Datar, Sumatera Barat</p>
-        </div>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Buku Tamu Digital - Kemenag Kab Tanah Datar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
 
-        <!-- Form Buku Tamu -->
-        <div class="form-container p-8">
-            <h2 class="text-2xl font-bold text-gray-800 mb-2 text-center">E-Tamu Kantor Kementerian Agama Kab. Tanah Datar</h2>
-            <p class="text-gray-600 text-center mb-8">Silakan mengisi data diri dengan lengkap dan benar</p>
-
-            <!-- Step Indicator -->
-            <div class="step-indicator">
-                <div class="step-dot active" data-step="1"></div>
-                <div class="step-dot" data-step="2"></div>
-                <div class="step-dot" data-step="3"></div>
-            </div>
-
-            <form id="guestBookForm" class="space-y-6">
-                <!-- Step 1: Identitas Dasar -->
-                <div class="form-step active" data-step="1">
-                    <!-- Nama -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            <i class="fas fa-user mr-2 text-blue-600"></i>Nama Lengkap *
-                        </label>
-                        <input type="text" id="nama" name="nama" required 
-                               class="w-full px-4 py-3 input-field focus:outline-none" 
-                               placeholder="Masukkan nama lengkap sesuai KTP">
-                    </div>
-
-                    <!-- Asal -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            <i class="fas fa-building mr-2 text-blue-600"></i>Berasal dari *
-                        </label>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="radio-card p-4" onclick="selectRadio('instansi')">
-                                <label class="flex items-center cursor-pointer">
-                                    <input type="radio" name="asal" value="Instansi" required class="mr-3">
-                                    <span>Instansi/Pemerintahan</span>
-                                </label>
-                            </div>
-                            <div class="radio-card p-4" onclick="selectRadio('umum')">
-                                <label class="flex items-center cursor-pointer">
-                                    <input type="radio" name="asal" value="Umum" required class="mr-3">
-                                    <span>Umum/Masyarakat</span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Nama Instansi (akan muncul jika memilih Instansi) -->
-                    <div id="instansiField" class="hidden">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            <i class="fas fa-university mr-2 text-blue-600"></i>Nama Instansi *
-                        </label>
-                        <input type="text" id="namaInstansi" name="namaInstansi" 
-                               class="w-full px-4 py-3 input-field focus:outline-none" 
-                               placeholder="Masukkan nama instansi lengkap">
-                    </div>
-
-                    <div class="form-navigation">
-                        <div></div> <!-- Spacer -->
-                        <button type="button" onclick="nextStep(2)" class="nav-btn btn-next">
-                            Selanjutnya <i class="fas fa-arrow-right ml-2"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Step 2: Tujuan Kunjungan -->
-                <div class="form-step" data-step="2">
-                    <!-- Tujuan ke Kantor -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            <i class="fas fa-target mr-2 text-blue-600"></i>Tujuan ke Kantor Kemenag Tanah Datar *
-                        </label>
-                        <textarea id="tujuanKantor" name="tujuanKantor" required rows="3" 
-                                  class="w-full px-4 py-3 input-field focus:outline-none" 
-                                  placeholder="Jelaskan secara detail tujuan kunjungan Anda ke kantor"></textarea>
-                    </div>
-
-                    <!-- Tujuan Pengurusan -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            <i class="fas fa-tasks mr-2 text-blue-600"></i>Tujuan Pengurusan *
-                        </label>
-                        <select id="tujuanPengurusan" name="tujuanPengurusan" required 
-                                class="w-full px-4 py-3 input-field focus:outline-none">
-                            <option value="">Pilih tujuan pengurusan</option>
-                            <option value="Kakan Kemenag">Kakan Kemenag</option>
-                            <option value="Kasubag">Kasubag</option>
-                            <option value="Kepegawaian">Kepegawaian</option>
-                            <option value="Keuangan">Keuangan</option>
-                            <option value="Seksi PAIS">Seksi PAIS</option>
-                            <option value="Seksi PONTREN">Seksi PONTREN</option>
-                            <option value="Seksi BIMAS">Seksi BIMAS</option>
-                            <option value="Seksi PENMAD">Seksi PENMAD</option>
-                            <option value="Seksi Haji dan Umroh (PHU)">Seksi Haji dan Umroh (PHU)</option>
-                            <option value="Seksi ZAWA">Seksi ZAWA</option>
-                        </select>
-                    </div>
-
-                    <div class="form-navigation">
-                        <button type="button" onclick="prevStep(1)" class="nav-btn btn-prev">
-                            <i class="fas fa-arrow-left mr-2"></i> Sebelumnya
-                        </button>
-                        <button type="button" onclick="nextStep(3)" class="nav-btn btn-next">
-                            Selanjutnya <i class="fas fa-arrow-right ml-2"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Step 3: Kontak dan Alamat -->
-                <div class="form-step" data-step="3">
-                    <!-- No. Handphone/WhatsApp -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            <i class="fas fa-phone mr-2 text-blue-600"></i>No. Handphone/WhatsApp *
-                        </label>
-                        <input type="tel" id="noHp" name="noHp" required 
-                               class="w-full px-4 py-3 input-field focus:outline-none" 
-                               placeholder="Contoh: 081234567890">
-                    </div>
-
-                    <!-- Alamat -->
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            <i class="fas fa-map-marker-alt mr-2 text-blue-600"></i>Alamat *
-                        </label>
-                        <textarea id="alamat" name="alamat" required rows="3" 
-                                  class="w-full px-4 py-3 input-field focus:outline-none" 
-                                  placeholder="Masukkan alamat lengkap"></textarea>
-                    </div>
-
-                    <div class="form-navigation">
-                        <button type="button" onclick="prevStep(2)" class="nav-btn btn-prev">
-                            <i class="fas fa-arrow-left mr-2"></i> Sebelumnya
-                        </button>
-                        <button type="submit" id="submitBtn" class="nav-btn submit-btn text-white font-semibold flex items-center justify-center">
-                            <span id="submitText">SIMPAN DATA TAMU</span>
-                            <div id="loadingSpinner" class="loading-spinner ml-2 hidden"></div>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <!-- Footer -->
-        <div class="text-center mt-8 text-gray-600 text-sm">
-            <p>Kantor Kementerian Agama Kabupaten Tanah Datar</p>
-            <p>Layanan Buku Tamu Digital - Sistem Terintegrasi</p>
-            <p>© 2025 Ihsan Putra Hanifi, S.Kom.</p>
-        </div>
-    </div>
-
-    <!-- Success Modal -->
-    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-        <div class="bg-white p-8 rounded-2xl text-center success-modal mx-4 max-w-md w-full">
-            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i class="fas fa-check-circle text-4xl text-green-600"></i>
-            </div>
-            <h3 class="text-2xl font-bold text-gray-800 mb-3">Data Berhasil Disimpan!</h3>
-            <p class="text-gray-600 mb-6">Terima kasih telah mengisi buku tamu digital kami. Data Anda telah tercatat dengan baik.</p>
-            <button onclick="closeModal()" class="px-8 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-semibold">
-                Tutup
-            </button>
-        </div>
-    </div>
-
-    <!-- Error Modal -->
-    <div id="errorModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-        <div class="bg-white p-8 rounded-2xl text-center error-modal mx-4 max-w-md w-full">
-            <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <i class="fas fa-exclamation-circle text-4xl text-red-600"></i>
-            </div>
-            <h3 class="text-2xl font-bold text-gray-800 mb-3" id="errorTitle">Terjadi Kesalahan</h3>
-            <p class="text-gray-600 mb-6" id="errorMessage">Silakan coba lagi beberapa saat.</p>
-            <button onclick="closeErrorModal()" class="px-8 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-semibold">
-                Tutup
-            </button>
-        </div>
-    </div>
-
-    <script>
-        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbweCwszsvynyd7dWXU4NCihv0RMlcAuM9gLBMCI0mnJILjDMfyiQJrfj-WeVSF_IFG-dg/exec';
-
-let currentStep = 1;
-
-function selectRadio(type) {
-    const radios = document.querySelectorAll('input[name="asal"]');
-    radios.forEach(radio => {
-        if ((type === 'instansi' && radio.value === 'Instansi') ||
-            (type === 'umum' && radio.value === 'Umum')) {
-            radio.checked = true;
-        } else {
-            radio.checked = false;
-        }
-    });
-
-    document.querySelectorAll('.radio-card').forEach(card => card.classList.remove('selected'));
-
-    if (type === 'instansi') {
-        document.querySelector('.radio-card:nth-child(1)').classList.add('selected');
-        document.getElementById('instansiField').classList.remove('hidden');
-        document.getElementById('namaInstansi').setAttribute('required', 'required');
-        document.getElementById('alamat').placeholder = "Masukkan alamat kantor instansi";
-    } else {
-        document.querySelector('.radio-card:nth-child(2)').classList.add('selected');
-        document.getElementById('instansiField').classList.add('hidden');
-        document.getElementById('namaInstansi').removeAttribute('required');
-        document.getElementById('alamat').placeholder = "Masukkan alamat pribadi";
+    :root {
+      --primary-blue: #3b82f6;
+      --secondary-blue: #2563eb;
+      --light-blue: #dbeafe;
+      --dark-blue: #1e40af;
+      --bg-gray: #f9fafb;
+      --input-bg: #ffffff;
+      --border-gray: #d1d5db;
+      --shadow-light: rgba(59, 130, 246, 0.15);
+      --error-red: #ef4444;
+      --success-green: #22c55e;
     }
-}
 
-// Sinkronisasi kelas .selected saat radio diklik langsung
-document.querySelectorAll('input[name="asal"]').forEach(radio => {
-    radio.addEventListener('change', function() {
-        if (this.value === 'Instansi') {
-            selectRadio('instansi');
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Inter", sans-serif;
+    }
+
+    body {
+      background: var(--bg-gray);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      max-width: 480px;
+      width: 100%;
+      background: var(--input-bg);
+      border-radius: 14px;
+      box-shadow: 0 12px 24px var(--shadow-light);
+      padding: 2.5rem 2rem 3rem;
+    }
+
+    .header-gradient {
+      background: linear-gradient(
+        135deg,
+        var(--primary-blue),
+        var(--secondary-blue)
+      );
+      border-radius: 14px;
+      padding: 1.5rem 1rem;
+      color: #fff;
+      text-align: center;
+      box-shadow: 0 8px 20px var(--shadow-light);
+      margin-bottom: 2rem;
+      user-select: none;
+    }
+
+    .logo-container {
+      max-width: 130px;
+      margin: 0 auto 1rem;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(8px);
+      transition: transform 0.3s ease;
+    }
+
+    .logo-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .logo-container:hover {
+      transform: scale(1.05);
+    }
+
+    .header-gradient h1 {
+      font-weight: 700;
+      font-size: 1.375rem;
+      line-height: 1.3;
+      margin-bottom: 0.25rem;
+      letter-spacing: 1px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .header-gradient h2 {
+      font-weight: 600;
+      font-size: 1.125rem;
+      margin-bottom: 0.25rem;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    }
+
+    .header-gradient p {
+      font-size: 0.8rem;
+      opacity: 0.85;
+    }
+
+    h2.form-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #334155;
+      text-align: center;
+      margin-bottom: 0.75rem;
+      user-select: none;
+    }
+
+    p.form-description {
+      text-align: center;
+      margin-bottom: 1.75rem;
+      color: #64748b;
+      font-size: 0.925rem;
+      user-select: none;
+    }
+
+    label,
+    legend,
+    span.field-label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #475569;
+      margin-bottom: 0.325rem;
+      user-select: none;
+    }
+
+    .input-field,
+    select,
+    textarea {
+      background: var(--input-bg);
+      border: 1.8px solid var(--border-gray);
+      border-radius: 12px;
+      font-size: 0.93rem;
+      padding: 0.55rem 1rem;
+      width: 100%;
+      resize: vertical;
+      box-shadow: none;
+      transition: border-color 0.3s ease, box-shadow 0.25s ease;
+      outline-offset: 2px;
+      color: #334155;
+      font-weight: 500;
+      user-select: text;
+      caret-color: var(--primary-blue);
+      font-family: inherit;
+    }
+
+    .input-field:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 10px var(--light-blue);
+      outline: none;
+    }
+
+    textarea {
+      min-height: 70px;
+      border-radius: 12px;
+      line-height: 1.4;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.4rem;
+      user-select: none;
+    }
+
+    .radio-card {
+      flex: 1;
+      padding: 12px 14px;
+      border: 1.8px solid var(--border-gray);
+      border-radius: 14px;
+      background: var(--input-bg);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      font-weight: 600;
+      color: #475569;
+      transition: all 0.3s ease;
+      user-select: none;
+      user-drag: none;
+      box-shadow: inset 0 0 5px transparent;
+    }
+
+    .radio-card input[type="radio"] {
+      accent-color: var(--primary-blue);
+      cursor: pointer;
+      user-select: none;
+      user-drag: none;
+      height: 18px;
+      width: 18px;
+      margin: 0;
+    }
+
+    .radio-card:hover {
+      border-color: var(--primary-blue);
+      background: var(--light-blue);
+      box-shadow: inset 0 0 8px var(--shadow-light);
+      color: var(--dark-blue);
+    }
+
+    .radio-card.selected {
+      border-color: var(--primary-blue);
+      background: var(--light-blue);
+      color: var(--dark-blue);
+      box-shadow: inset 0 0 13px var(--shadow-light);
+    }
+
+    button.submit-btn {
+      width: 100%;
+      background: var(--primary-blue);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.9rem 0;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      letter-spacing: 0.65px;
+      box-shadow: 0 8px 18px var(--shadow-light);
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.6rem;
+      user-select: none;
+      user-drag: none;
+    }
+
+    button.submit-btn:hover:not(:disabled) {
+      background: var(--secondary-blue);
+      box-shadow: 0 12px 24px var(--dark-blue);
+      transform: translateY(-2px);
+    }
+
+    button.submit-btn:disabled {
+      background: #a1a1aa;
+      box-shadow: none;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .loading-spinner {
+      border: 3px solid #dbeafe;
+      border-top: 3px solid var(--input-bg);
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+      margin-left: 0.5rem;
+      user-select: none;
+      user-drag: none;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.825rem;
+      font-weight: 500;
+      color: #64748b;
+      text-align: center;
+      user-select: none;
+      user-drag: none;
+      letter-spacing: 0.25px;
+      line-height: 1.3;
+    }
+
+    /* Modal */
+    .modal-bg {
+      background: rgba(0, 0, 0, 0.45);
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      opacity: 1;
+      transition: opacity 0.4s ease;
+      user-select: none;
+      user-drag: none;
+    }
+
+    .modal-bg.hidden {
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .modal-content {
+      background: #fff;
+      border-radius: 20px;
+      padding: 2rem 2.25rem;
+      max-width: 380px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18);
+      user-select: none;
+      user-drag: none;
+      transition: transform 0.35s ease;
+    }
+
+    .modal-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .modal-btn {
+      margin-top: 1.75rem;
+      padding: 0.75rem 3rem;
+      background: var(--primary-blue);
+      color: #fff;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      letter-spacing: 0.9px;
+      user-select: none;
+      user-drag: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal-btn:hover {
+      background: var(--secondary-blue);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header-gradient" aria-label="Header Kementerian Agama">
+      <div class="logo-container" aria-hidden="true">
+        <img src="LKTD.png" alt="Logo Kementerian Agama Republik Indonesia" />
+      </div>
+      <h1>KEMENTERIAN AGAMA REPUBLIK INDONESIA</h1>
+      <h2>KANTOR KABUPATEN TANAH DATAR</h2>
+      <p>Jl. M.Yamin Bukit Gombak Batusangkar, Tanah Datar, Sumatera Barat</p>
+    </header>
+
+    <main>
+      <h2 class="form-title" aria-label="Judul Form">E-Tamu Kantor Kementerian Agama Kab. Tanah Datar</h2>
+      <p class="form-description">Silakan mengisi data diri dengan lengkap dan benar</p>
+
+      <form id="guestBookForm" novalidate>
+        <div>
+          <label for="nama">
+            <i class="fas fa-user mr-2 text-blue-600"></i>Nama Lengkap *
+          </label>
+          <input
+            type="text"
+            id="nama"
+            name="nama"
+            placeholder="Masukkan nama lengkap sesuai KTP"
+            required
+            class="input-field"
+            autocomplete="name"
+          />
+        </div>
+
+        <div>
+          <span class="field-label">
+            <i class="fas fa-building mr-2 text-blue-600"></i>Berasal dari *
+          </span>
+          <div class="radio-group" role="radiogroup" aria-required="true" aria-labelledby="asal-label">
+            <div class="radio-card" onclick="selectRadio('instansi')">
+              <label>
+                <input type="radio" name="asal" value="Instansi" required aria-checked="false" />
+                Instansi/Pemerintahan
+              </label>
+            </div>
+            <div class="radio-card" onclick="selectRadio('umum')">
+              <label>
+                <input type="radio" name="asal" value="Umum" aria-checked="false" />
+                Umum/Masyarakat
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div id="instansiField" class="hidden">
+          <label for="namaInstansi">
+            <i class="fas fa-university mr-2 text-blue-600"></i>Nama Instansi *
+          </label>
+          <input
+            type="text"
+            id="namaInstansi"
+            name="namaInstansi"
+            placeholder="Masukkan nama instansi lengkap"
+            class="input-field"
+          />
+        </div>
+
+        <div>
+          <label for="tujuanKantor">
+            <i class="fas fa-target mr-2 text-blue-600"></i>Tujuan ke Kantor Kemenag Tanah Datar *
+          </label>
+          <textarea
+            id="tujuanKantor"
+            name="tujuanKantor"
+            rows="3"
+            placeholder="Jelaskan secara detail tujuan kunjungan Anda ke kantor"
+            required
+            class="input-field"
+          ></textarea>
+        </div>
+
+        <div>
+          <label for="tujuanPengurusan">
+            <i class="fas fa-tasks mr-2 text-blue-600"></i>Tujuan Pengurusan *
+          </label>
+          <select id="tujuanPengurusan" name="tujuanPengurusan" class="input-field" required>
+            <option value="">Pilih tujuan pengurusan</option>
+            <option value="Kakan Kemenag">Kakan Kemenag</option>
+            <option value="Kasubag">Kasubag</option>
+            <option value="Kepegawaian">Kepegawaian</option>
+            <option value="Keuangan">Keuangan</option>
+            <option value="Seksi PAIS">Seksi PAIS</option>
+            <option value="Seksi PONTREN">Seksi PONTREN</option>
+            <option value="Seksi BIMAS">Seksi BIMAS</option>
+            <option value="Seksi PENMAD">Seksi PENMAD</option>
+            <option value="Seksi Haji dan Umroh (PHU)">Seksi Haji dan Umroh (PHU)</option>
+            <option value="Seksi ZAWA">Seksi ZAWA</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="noHp">
+            <i class="fas fa-phone mr-2 text-blue-600"></i>No. Handphone/WhatsApp *
+          </label>
+          <input
+            type="tel"
+            id="noHp"
+            name="noHp"
+            placeholder="Contoh: 081234567890"
+            required
+            class="input-field"
+            autocomplete="tel"
+          />
+        </div>
+
+        <div>
+          <label for="alamat">
+            <i class="fas fa-map-marker-alt mr-2 text-blue-600"></i>Alamat *
+          </label>
+          <textarea
+            id="alamat"
+            name="alamat"
+            rows="3"
+            placeholder="Masukkan alamat lengkap"
+            required
+            class="input-field"
+          ></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <span id="submitText">SIMPAN DATA TAMU</span>
+          <div id="loadingSpinner" class="loading-spinner hidden"></div>
+        </button>
+      </form>
+    </main>
+
+    <footer>
+      <p>Kantor Kementerian Agama Kabupaten Tanah Datar</p>
+      <p>Layanan Buku Tamu Digital - Sistem Terintegrasi</p>
+      <p>© 2025 Ihsan Putra Hanifi, S.Kom.</p>
+    </footer>
+  </div>
+
+  <!-- Success Modal -->
+  <div
+    id="successModal"
+    class="modal-bg hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="successTitle"
+    aria-describedby="successDesc"
+  >
+    <div class="modal-content">
+      <div class="modal-icon text-success-green">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      <h3 id="successTitle" class="text-xl font-bold text-gray-800 mb-2">
+        Data Berhasil Disimpan!
+      </h3>
+      <p id="successDesc" class="text-gray-600 mb-6">
+        Terima kasih telah mengisi buku tamu digital kami. Data Anda telah
+        tercatat dengan baik.
+      </p>
+      <button onclick="closeModal()" class="modal-btn">Tutup</button>
+    </div>
+  </div>
+
+  <!-- Error Modal -->
+  <div
+    id="errorModal"
+    class="modal-bg hidden"
+    role="alertdialog"
+    aria-modal="true"
+    aria-labelledby="errorTitle"
+    aria-describedby="errorMessage"
+  >
+    <div class="modal-content">
+      <div class="modal-icon text-error-red">
+        <i class="fas fa-exclamation-circle"></i>
+      </div>
+      <h3 id="errorTitle" class="text-xl font-bold text-gray-800 mb-2">
+        Terjadi Kesalahan
+      </h3>
+      <p id="errorMessage" class="text-gray-600 mb-6">
+        Silakan coba lagi beberapa saat.
+      </p>
+      <button onclick="closeErrorModal()" class="modal-btn">Tutup</button>
+    </div>
+  </div>
+
+  <script>
+    const GOOGLE_SCRIPT_URL =
+      "https://script.google.com/macros/s/AKfycbweCwszsvynyd7dWXU4NCihv0RMlcAuM9gLBMCI0mnJILjDMfyiQJrfj-WeVSF_IFG-dg/exec";
+
+    function selectRadio(type) {
+      const radios = document.querySelectorAll('input[name="asal"]');
+      radios.forEach((radio) => {
+        if (
+          (type === "instansi" && radio.value === "Instansi") ||
+          (type === "umum" && radio.value === "Umum")
+        ) {
+          radio.checked = true;
         } else {
-            selectRadio('umum');
+          radio.checked = false;
         }
-    });
-});
+      });
 
-function nextStep(step) {
-    if (currentStep === 1) {
-        const nama = document.getElementById('nama').value.trim();
+      document.querySelectorAll(".radio-card").forEach((card) =>
+        card.classList.remove("selected")
+      );
+
+      if (type === "instansi") {
+        document
+          .querySelector(".radio-card:nth-child(1)")
+          .classList.add("selected");
+        document.getElementById("instansiField").classList.remove("hidden");
+        document
+          .getElementById("namaInstansi")
+          .setAttribute("required", "required");
+        document.getElementById("alamat").placeholder =
+          "Masukkan alamat kantor instansi";
+      } else {
+        document
+          .querySelector(".radio-card:nth-child(2)")
+          .classList.add("selected");
+        document.getElementById("instansiField").classList.add("hidden");
+        document.getElementById("namaInstansi").removeAttribute("required");
+        document.getElementById("alamat").placeholder = "Masukkan alamat pribadi";
+      }
+    }
+
+    // Sinkronisasi kelas .selected saat radio diklik langsung
+    document
+      .querySelectorAll('input[name="asal"]')
+      .forEach((radio) => {
+        radio.addEventListener("change", function () {
+          if (this.value === "Instansi") {
+            selectRadio("instansi");
+          } else {
+            selectRadio("umum");
+          }
+        });
+      });
+
+    document
+      .getElementById("guestBookForm")
+      .addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const nama = document.getElementById("nama").value.trim();
         const asal = document.querySelector('input[name="asal"]:checked');
+        const namaInstansi = document.getElementById("namaInstansi").value.trim();
+        const tujuanKantor = document.getElementById("tujuanKantor").value.trim();
+        const tujuanPengurusan = document.getElementById("tujuanPengurusan").value;
+        const noHp = document.getElementById("noHp").value.trim();
+        const alamat = document.getElementById("alamat").value.trim();
 
         if (!nama) {
-            showErrorModal('Validation Error', 'Nama lengkap harus diisi');
-            return;
+          showErrorModal("Validation Error", "Nama lengkap harus diisi");
+          return;
         }
         if (!asal) {
-            showErrorModal('Validation Error', 'Silakan pilih asal Anda');
-            return;
+          showErrorModal("Validation Error", "Silakan pilih asal Anda");
+          return;
         }
-        if (asal.value === 'Instansi' && !document.getElementById('namaInstansi').value.trim()) {
-            showErrorModal('Validation Error', 'Nama instansi harus diisi');
-            return;
+        if (asal.value === "Instansi" && !namaInstansi) {
+          showErrorModal("Validation Error", "Nama instansi harus diisi");
+          return;
         }
-    }
-    if (currentStep === 2) {
-        const tujuan = document.getElementById('tujuanKantor').value.trim();
-        const pengurusan = document.getElementById('tujuanPengurusan').value;
-
-        if (!tujuan) {
-            showErrorModal('Validation Error', 'Tujuan kunjungan harus diisi');
-            return;
+        if (!tujuanKantor) {
+          showErrorModal("Validation Error", "Tujuan kunjungan harus diisi");
+          return;
         }
-        if (!pengurusan) {
-            showErrorModal('Validation Error', 'Silakan pilih tujuan pengurusan');
-            return;
+        if (!tujuanPengurusan) {
+          showErrorModal(
+            "Validation Error",
+            "Silakan pilih tujuan pengurusan"
+          );
+          return;
         }
-    }
+        if (!noHp) {
+          showErrorModal("Validation Error", "Nomor handphone harus diisi");
+          return;
+        }
+        if (!alamat) {
+          showErrorModal("Validation Error", "Alamat harus diisi");
+          return;
+        }
 
-    document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.remove('active');
-    document.querySelector(`.step-dot[data-step="${currentStep}"]`).classList.remove('active');
+        const submitBtn = document.getElementById("submitBtn");
+        const submitText = document.getElementById("submitText");
+        const loadingSpinner = document.getElementById("loadingSpinner");
 
-    currentStep = step;
+        submitBtn.disabled = true;
+        submitText.textContent = "Menyimpan...";
+        loadingSpinner.classList.remove("hidden");
 
-    document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.add('active');
-    document.querySelector(`.step-dot[data-step="${currentStep}"]`).classList.add('active');
-}
+        const formData = {
+          nama: nama,
+          asal: asal.value,
+          nama_instansi: asal.value === "Instansi" ? namaInstansi : "-",
+          tujuan_kantor: tujuanKantor,
+          tujuan_pengurusan: tujuanPengurusan,
+          no_hp: noHp,
+          alamat: alamat,
+        };
 
-function prevStep(step) {
-    document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.remove('active');
-    document.querySelector(`.step-dot[data-step="${currentStep}"]`).classList.remove('active');
-
-    currentStep = step;
-
-    document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.add('active');
-    document.querySelector(`.step-dot[data-step="${currentStep}"]`).classList.add('active');
-}
-
-document.getElementById('guestBookForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const noHp = document.getElementById('noHp').value.trim();
-    const alamat = document.getElementById('alamat').value.trim();
-
-    if (!noHp) {
-        showErrorModal('Validation Error', 'Nomor handphone harus diisi');
-        return;
-    }
-    if (!alamat) {
-        showErrorModal('Validation Error', 'Alamat harus diisi');
-        return;
-    }
-
-    const submitBtn = document.getElementById('submitBtn');
-    const submitText = document.getElementById('submitText');
-    const loadingSpinner = document.getElementById('loadingSpinner');
-
-    submitBtn.disabled = true;
-    submitText.textContent = "Menyimpan...";
-    loadingSpinner.classList.remove('hidden');
-
-    const formData = {
-    
-        nama: document.getElementById('nama').value.trim(),
-        asal: document.querySelector('input[name="asal"]:checked').value,
-        nama_instansi: document.getElementById('namaInstansi').value.trim() || '-',
-        tujuan_kantor: document.getElementById('tujuanKantor').value.trim(),
-        tujuan_pengurusan: document.getElementById('tujuanPengurusan').value,
-        no_hp: noHp,
-        alamat: alamat
-    };
-
-    try {
-        // Gunakan mode no-cors karena Google Apps Script default tidak mengizinkan CORS
-        await fetch(GOOGLE_SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
+        try {
+          await fetch(GOOGLE_SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
             headers: {
-                'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify(formData)
-        });
+            body: JSON.stringify(formData),
+          });
 
-        showModal();
-        this.reset();
-
-        // Reset ke step 1
-        document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
-        document.querySelectorAll('.step-dot').forEach(dot => dot.classList.remove('active'));
-        document.querySelector('.form-step[data-step="1"]').classList.add('active');
-        document.querySelector('.step-dot[data-step="1"]').classList.add('active');
-        currentStep = 1;
-
-    } catch (error) {
-        showErrorModal('Kesalahan Jaringan', 'Terjadi kesalahan jaringan. Silakan coba lagi.');
-    } finally {
-        submitBtn.disabled = false;
-        submitText.textContent = "SIMPAN DATA TAMU";
-        loadingSpinner.classList.add('hidden');
-    }
-});
-
-function showModal() {
-    document.getElementById('successModal').classList.remove('hidden');
-}
-
-function closeModal() {
-    document.getElementById('successModal').classList.add('hidden');
-}
-
-function showErrorModal(title, message) {
-    document.getElementById('errorTitle').textContent = title;
-    document.getElementById('errorMessage').textContent = message;
-    document.getElementById('errorModal').classList.remove('hidden');
-}
-
-function closeErrorModal() {
-    document.getElementById('errorModal').classList.add('hidden');
-}
-
-// Validasi input nomor handphone
-document.getElementById('noHp').addEventListener('input', function() {
-    this.value = this.value.replace(/[^0-9+]/g, '');
-});
-
-// Prevent form submission on Enter key except textarea and select
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA' && e.target.tagName !== 'SELECT') {
-        e.preventDefault();
-        if (currentStep < 3) {
-            nextStep(currentStep + 1);
+          showModal();
+          this.reset();
+          // Hide instansiField on reset
+          document.getElementById("instansiField").classList.add("hidden");
+          document
+            .querySelectorAll(".radio-card")
+            .forEach((card) => card.classList.remove("selected"));
+          submitBtn.disabled = false;
+          submitText.textContent = "SIMPAN DATA TAMU";
+          loadingSpinner.classList.add("hidden");
+        } catch (error) {
+          showErrorModal("Kesalahan Jaringan", "Terjadi kesalahan jaringan. Silakan coba lagi.");
+          submitBtn.disabled = false;
+          submitText.textContent = "SIMPAN DATA TAMU";
+          loadingSpinner.classList.add("hidden");
         }
-    }
-});
+      });
 
-    </script>
+    function showModal() {
+      document.getElementById("successModal").classList.remove("hidden");
+    }
+
+    function closeModal() {
+      document.getElementById("successModal").classList.add("hidden");
+    }
+
+    function showErrorModal(title, message) {
+      document.getElementById("errorTitle").textContent = title;
+      document.getElementById("errorMessage").textContent = message;
+      document.getElementById("errorModal").classList.remove("hidden");
+    }
+
+    function closeErrorModal() {
+      document.getElementById("errorModal").classList.add("hidden");
+    }
+
+    document.getElementById("noHp").addEventListener("input", function () {
+      this.value = this.value.replace(/[^0-9+]/g, "");
+    });
+  </script>
 </body>
 </html>
-
