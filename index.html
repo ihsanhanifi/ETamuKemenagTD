@@ -44,6 +44,8 @@
       align-items: flex-start;
       padding: 2rem 1rem 3rem;
       color: var(--text-dark);
+      font-size: 16px;
+      line-height: 1.6;
     }
 
     .container {
@@ -52,8 +54,9 @@
       max-width: 460px;
       border-radius: var(--radius-lg);
       box-shadow: 0 16px 40px var(--shadow-light);
-      padding: 3rem 3rem 4rem;
+      padding: 3rem 2rem 4rem;
       user-select: none;
+      margin: 0 1rem;
     }
 
     .header-gradient {
@@ -125,27 +128,28 @@
 
     .header-gradient h1 {
       font-weight: 900;
-      font-size: 2rem;
-      letter-spacing: 1.9px;
+      font-size: 1.6rem;
+      letter-spacing: 1.2px;
       margin-bottom: 0.5rem;
-      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
       text-transform: uppercase;
+      text-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
     }
 
     .header-gradient h2 {
       font-weight: 700;
-      font-size: 1.4rem;
+      font-size: 1.1rem;
       margin-bottom: 0.85rem;
-      letter-spacing: 1px;
-      text-shadow: 0 2px 7px rgba(0, 0, 0, 0.28);
+      letter-spacing: 0.7px;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+      position: relative;
     }
 
     .header-gradient h2::after {
       content: "";
       display: block;
-      width: 60px;
-      margin: 8px auto 0;
-      height: 2.5px;
+      width: 45px;
+      height: 2px;
+      margin: 6px auto 0;
       background: rgba(255, 255, 255, 0.65);
       border-radius: 2px;
     }
@@ -160,65 +164,60 @@
     }
 
     h2.form-title {
-      font-size: 1.8rem;
+      font-size: 1.4rem;
       font-weight: 700;
       color: var(--text-dark);
       text-align: center;
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.5rem;
       user-select: none;
     }
 
     p.form-description {
-      text-align: center;
-      margin-bottom: 2.2rem;
+      font-size: 1rem;
       color: var(--text-muted);
-      font-size: 1.05rem;
-      line-height: 1.6;
-      user-select: none;
+      line-height: 1.5;
+      text-align: center;
+      margin-bottom: 2rem;
       padding: 0 0.4rem;
     }
 
     label,
     legend,
     span.field-label {
-      display: block;
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: var(--text-dark);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
       user-select: none;
     }
 
     .input-field,
     select,
     textarea {
-      background: var(--bg-white);
-      border: 2.5px solid var(--border-gray);
+      font-size: 1rem;
+      padding: 0.9rem 1.2rem;
       border-radius: var(--radius-lg);
-      font-size: 1.15rem;
-      padding: 1rem 1.5rem;
-      width: 100%;
-      resize: vertical;
+      border: 2.5px solid var(--border-gray);
       color: var(--text-dark);
-      font-weight: 600;
-      caret-color: var(--primary-purple);
-      box-sizing: border-box;
-      transition: border-color 0.35s ease, box-shadow 0.35s ease;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
       outline-offset: 4px;
       font-family: inherit;
+      width: 100%;
+      box-sizing: border-box;
+      resize: vertical;
     }
 
     .input-field:focus,
     select:focus,
     textarea:focus {
       border-color: var(--primary-purple);
-      box-shadow: 0 0 25px var(--primary-purple);
+      box-shadow: 0 0 20px var(--primary-purple);
       outline: none;
     }
 
     textarea {
-      min-height: 120px;
-      line-height: 1.6;
+      min-height: 110px;
+      line-height: 1.5;
       font-weight: 600;
     }
 
@@ -248,30 +247,28 @@
     }
 
     .radio-card {
+      font-size: 1rem;
       flex: 0 0 auto;
-      padding: 18px 24px;
-      border: 2.5px solid var(--border-gray);
-      border-radius: 2.5rem;
+      padding: 16px 22px;
+      border-radius: 2rem;
       background: var(--bg-white);
       display: flex;
       align-items: center;
-      gap: 1.2rem;
+      gap: 1rem;
       cursor: pointer;
       font-weight: 700;
-      font-size: 1.15rem;
       color: var(--text-dark);
+      border: 2.5px solid var(--border-gray);
       transition: all 0.3s ease;
       user-select: none;
-      user-drag: none;
-      box-shadow: inset 0 0 10px transparent;
       white-space: nowrap;
     }
 
     .radio-card input[type="radio"] {
       accent-color: var(--primary-pink);
       cursor: pointer;
-      height: 28px;
-      width: 28px;
+      height: 24px;
+      width: 24px;
       margin: 0;
     }
 
@@ -292,23 +289,22 @@
 
     button.submit-btn {
       width: 100%;
+      font-size: 1.1rem;
+      padding: 1.2rem 0;
+      border-radius: 2rem;
       background: linear-gradient(90deg, var(--primary-pink), var(--primary-purple));
       color: var(--bg-white);
       font-weight: 800;
-      font-size: 1.3rem;
-      padding: 1.3rem 0;
-      border: none;
-      border-radius: 2rem;
       cursor: pointer;
-      letter-spacing: 1.3px;
+      letter-spacing: 1.1px;
       box-shadow: 0 16px 44px rgba(255, 129, 168, 0.4);
-      transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-        box-shadow 0.3s ease, transform 0.2s ease;
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
       display: flex;
       justify-content: center;
       align-items: center;
-      user-select: none;
       gap: 1.2rem;
+      user-select: none;
+      border: none;
       margin-top: 3rem;
     }
 
@@ -390,6 +386,7 @@
       text-align: center;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.22);
       user-select: none;
+      allign-items: center;
       transform: translateY(0);
       transition: transform 0.35s ease;
       outline: none;
@@ -429,6 +426,84 @@
     .modal-btn:focus-visible {
       background: var(--primary-pink);
       outline: 4px solid var(--primary-pink);
+    }
+
+    /* Responsive typography */
+
+    @media (min-width: 640px) {
+      body {
+        font-size: 17px;
+      }
+
+      .header-gradient h1 {
+        font-size: 1.9rem;
+        letter-spacing: 1.5px;
+      }
+
+      .header-gradient h2 {
+        font-size: 1.25rem;
+        letter-spacing: 0.9px;
+      }
+
+      h2.form-title {
+        font-size: 1.6rem;
+      }
+
+      label,
+      legend,
+      span.field-label {
+        font-size: 1.1rem;
+      }
+
+      .input-field,
+      select,
+      textarea {
+        font-size: 1.1rem;
+        padding: 1rem 1.5rem;
+      }
+
+      textarea {
+        min-height: 130px;
+        line-height: 1.6;
+      }
+
+      .radio-card {
+        font-size: 1.1rem;
+        padding: 18px 24px;
+        gap: 1.2rem;
+      }
+
+      button.submit-btn {
+        font-size: 1.25rem;
+      }
+
+      .modal-content h3 {
+        font-size: 1.6rem;
+      }
+
+      .modal-content p {
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      body {
+        font-size: 18px;
+      }
+
+      .container {
+        max-width: 540px;
+      }
+
+      .header-gradient h1 {
+        font-size: 2.2rem;
+        letter-spacing: 2px;
+      }
+
+      .header-gradient h2 {
+        font-size: 1.4rem;
+        letter-spacing: 1.1px;
+      }
     }
   </style>
 </head>
