@@ -13,8 +13,6 @@
     :root {
       --primary-pink: #ff81a8;
       --primary-purple: #a66cff;
-      --primary-blue: #6cb8ff;
-      --primary-green: #8de7a6;
       --bg-light: #faf8f7;
       --bg-white: #ffffff;
       --text-dark: #3c3a45;
@@ -398,7 +396,7 @@
     }
 
     .modal-icon.text-success-green {
-      color: var(--primary-green);
+      color: var(--success-green);
     }
 
     .modal-icon.text-error-red {
@@ -428,60 +426,32 @@
       outline: 4px solid var(--primary-pink);
     }
 
-    /* Responsif untuk layar lebih besar */
+    /* Kamera dan Preview Foto */
+    video#video {
+      width: 100%;
+      max-width: 320px;
+      border: 2px solid var(--primary-pink);
+      border-radius: var(--radius-lg);
+      transform: scaleX(-1);
+      object-fit: cover;
+      aspect-ratio: 4 / 3;
+      background: #000;
+    }
+
+    #photoPreview {
+      width: 100%;
+      max-width: 320px;
+      border: 2px solid var(--primary-purple);
+      border-radius: var(--radius-lg);
+      display: none;
+      object-fit: contain;
+      aspect-ratio: 4 / 3;
+      background: #000;
+    }
+
     @media (min-width: 640px) {
       body {
         font-size: 17px;
-      }
-
-      .header-gradient h1 {
-        font-size: 2.1rem;
-        letter-spacing: 1.6px;
-      }
-
-      .header-gradient h2 {
-        font-size: 1.4rem;
-        letter-spacing: 1px;
-      }
-
-      h2.form-title {
-        font-size: 1.8rem;
-      }
-
-      label,
-      legend,
-      span.field-label {
-        font-size: 1.1rem;
-      }
-
-      .input-field,
-      select,
-      textarea {
-        font-size: 1.1rem;
-        padding: 14px 18px;
-      }
-
-      textarea {
-        min-height: 140px;
-        line-height: 1.7;
-      }
-
-      .radio-card {
-        font-size: 1.1rem;
-        padding: 18px 24px;
-        gap: 1.3rem;
-      }
-
-      button.submit-btn {
-        font-size: 1.3rem;
-      }
-
-      .modal-content h3 {
-        font-size: 1.8rem;
-      }
-
-      .modal-content p {
-        font-size: 1.2rem;
       }
     }
 
@@ -492,16 +462,6 @@
 
       .container {
         max-width: 540px;
-      }
-
-      .header-gradient h1 {
-        font-size: 2.4rem;
-        letter-spacing: 1.9px;
-      }
-
-      .header-gradient h2 {
-        font-size: 1.5rem;
-        letter-spacing: 1.1px;
       }
     }
   </style>
@@ -620,6 +580,19 @@
           <textarea id="alamat" name="alamat" rows="3" placeholder="Masukkan alamat lengkap" required class="input-field"></textarea>
         </div>
 
+        <div class="form-group">
+          <label>Foto Otomatis (Menggunakan Kamera)</label>
+          <div class="flex flex-col items-center gap-3">
+            <video id="video" autoplay playsinline></video>
+            <button type="button" id="takePhotoBtn" class="submit-btn" style="width: auto; padding: 0.6rem 1.2rem; font-size: 1rem;">
+              Ambil Foto
+            </button>
+            <canvas id="canvas" style="display: none;"></canvas>
+            <img id="photoPreview" alt="Pratinjau Foto" class="rounded-lg" />
+            <input type="hidden" id="imageData" name="imageData" />
+          </div>
+        </div>
+
         <button type="submit" class="submit-btn" id="submitBtn" aria-label="Simpan Data Tamu">
           <span id="submitText">SIMPAN DATA TAMU</span>
           <div id="loadingSpinner" class="loading-spinner hidden" aria-hidden="true"></div>
@@ -634,7 +607,7 @@
     </footer>
   </div>
 
-  <!-- Success Modal -->
+  <!-- Modal Success -->
   <div id="successModal" class="modal-bg hidden" role="dialog" aria-modal="true" aria-labelledby="successTitle"
     aria-describedby="successDesc">
     <div class="modal-content" tabindex="-1">
@@ -647,7 +620,7 @@
     </div>
   </div>
 
-  <!-- Error Modal -->
+  <!-- Modal Error -->
   <div id="errorModal" class="modal-bg hidden" role="alertdialog" aria-modal="true" aria-labelledby="errorTitle"
     aria-describedby="errorMessage">
     <div class="modal-content" tabindex="-1">
@@ -662,7 +635,7 @@
 
   <script>
     const GOOGLE_SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycbweCwszsvynyd7dWXU4NCihv0RMlcAuM9gLBMCI0mnJILjDMfyiQJrfj-WeVSF_IFG-dg/exec";
+      "https://script.google.com/macros/s/AKfycbxYhDLJ5ApWTarCwccrABMkMn7q-uFkwJ1ypJ1MZyLmor3aEFqU0GgPxrDv4c1EZqZDTg/exec";
 
     function selectRadio(type) {
       const radios = document.querySelectorAll('input[name="asal"]');
@@ -764,13 +737,69 @@
       });
     });
 
+    // Kamera dan Foto
+    const video = document.getElementById("video");
+    const canvas = document.getElementById("canvas");
+    const photoPreview = document.getElementById("photoPreview");
+    const imageDataInput = document.getElementById("imageData");
+    const takePhotoBtn = document.getElementById("takePhotoBtn");
+    let stream;
+
+    async function startCamera() {
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false });
+        video.srcObject = stream;
+
+        await new Promise((resolve) => {
+          video.onloadedmetadata = () => resolve();
+        });
+      } catch (error) {
+        console.error("Gagal mengakses kamera:", error);
+        alert("Tidak dapat mengakses kamera. Pastikan izin kamera diberikan.");
+      }
+    }
+
+    function takePhoto() {
+      if (!stream) {
+        alert("Kamera belum siap.");
+        return;
+      }
+
+      // Ukuran canvas disamakan dengan ukuran tampilan video supaya proporsional
+      const rect = video.getBoundingClientRect();
+      const width = rect.width;
+      const height = rect.height;
+
+      canvas.width = width;
+      canvas.height = height;
+
+      const ctx = canvas.getContext("2d");
+
+      // Flip horizontal supaya hasil tidak mirror
+      ctx.translate(canvas.width, 0);
+      ctx.scale(-1, 1);
+
+      // drawImage dengan resize ke ukuran canvas kecil, hasil file lebih kecil juga
+      ctx.drawImage(video, 0, 0, width, height);
+
+      // Konversi ke data URL JPEG dengan kualitas 0.75 (75%)
+      const imageDataURL = canvas.toDataURL("image/jpeg", 0.75);
+
+      imageDataInput.value = imageDataURL;
+      photoPreview.src = imageDataURL;
+      photoPreview.style.display = "block";
+    }
+
+    takePhotoBtn.addEventListener("click", takePhoto);
+
+    window.addEventListener("load", startCamera);
+
     document.getElementById("guestBookForm").addEventListener("submit", async function (e) {
       e.preventDefault();
 
       const nama = document.getElementById("nama").value.trim();
       const asal = document.querySelector('input[name="asal"]:checked');
       const namaInstansi = document.getElementById("namaInstansi").value.trim();
-
       const tujuanKantorRadio = document.querySelector('input[name="tujuanKantor"]:checked');
       const tujuanPengurusan = document.getElementById("tujuanPengurusan").value;
       const noHp = document.getElementById("noHp").value.trim();
@@ -838,6 +867,7 @@
         tujuan_pengurusan: tujuanPengurusan,
         no_hp: noHp,
         alamat: alamat,
+        foto: imageDataInput.value || "",
       };
 
       try {
@@ -854,6 +884,7 @@
         this.reset();
         document.getElementById("instansiField").classList.add("hidden");
         document.querySelectorAll(".radio-card").forEach((card) => card.classList.remove("selected"));
+        photoPreview.style.display = "none";
         submitBtn.disabled = false;
         submitText.textContent = "SIMPAN DATA TAMU";
         loadingSpinner.classList.add("hidden");
