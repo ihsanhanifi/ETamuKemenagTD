@@ -382,27 +382,32 @@
       outline: 4px solid var(--primary-yellow);
     }
     video#video {
-      width: 100%;
-      max-width: 320px;
-      min-height: 240px;
-      border: 2px solid var(--primary-green);
-      border-radius: var(--radius-lg);
-      object-fit: cover;
-      aspect-ratio: 4 / 3;
-      background: #000;
-      display: block;
-    }
-    #photoPreview {
-      width: 100%;
-      max-width: 320px;
-      min-height: 240px;
-      border: 2px solid var(--primary-yellow);
-      border-radius: var(--radius-lg);
-      display: none;
-      object-fit: cover;
-      aspect-ratio: 4 / 3;
-      background: #000;
-    }
+  width: 100%;
+  max-width: 320px;
+  height: auto; /* otomatis sesuai aspect ratio */
+  border: 2px solid var(--primary-green);
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+  background: #000;
+  display: block;
+  margin-bottom: 12px; /* beri jarak bawah */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* efek bayangan */
+}
+
+#photoPreview {
+  width: 100%;
+  max-width: 320px;
+  height: auto; /* otomatis sesuai aspect ratio */
+  border: 2px solid var(--primary-yellow);
+  border-radius: var(--radius-lg);
+  display: none;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+  background: #000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
     @media (min-width: 640px) {
       body {
         font-size: 17px;
