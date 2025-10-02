@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap");
-
     :root {
       --primary-pink: #ff81a8;
       --primary-purple: #a66cff;
@@ -24,7 +23,6 @@
       --radius-lg: 1.25rem;
       --radius-full: 9999px;
     }
-
     * {
       margin: 0;
       padding: 0;
@@ -33,7 +31,6 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-
     body {
       background: var(--bg-light);
       min-height: 100vh;
@@ -45,7 +42,6 @@
       font-size: 16px;
       line-height: 1.6;
     }
-
     .container {
       background: var(--bg-white);
       width: 100%;
@@ -56,7 +52,6 @@
       user-select: none;
       margin: 0 1rem;
     }
-
     .header-gradient {
       background: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
       border-radius: var(--radius-lg);
@@ -69,7 +64,6 @@
       position: relative;
       overflow: hidden;
     }
-
     .logo-container {
       width: 130px;
       height: 130px;
@@ -83,7 +77,6 @@
       cursor: default;
       border: 3px solid rgba(255, 255, 255, 0.5);
     }
-
     .logo-container img {
       width: 100%;
       height: 100%;
@@ -92,11 +85,9 @@
       user-select: none;
       pointer-events: none;
     }
-
     .logo-container:hover {
       transform: scale(1.12) rotate(3deg);
     }
-
     .header-gradient::before,
     .header-gradient::after {
       content: "";
@@ -105,7 +96,6 @@
       opacity: 0.15;
       pointer-events: none;
     }
-
     .header-gradient::before {
       width: 120px;
       height: 120px;
@@ -114,7 +104,6 @@
       left: -40px;
       filter: blur(40px);
     }
-
     .header-gradient::after {
       width: 180px;
       height: 180px;
@@ -123,7 +112,6 @@
       right: -60px;
       filter: blur(50px);
     }
-
     .header-gradient h1 {
       font-weight: 900;
       font-size: 1.9rem;
@@ -132,7 +120,6 @@
       text-transform: uppercase;
       text-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);
     }
-
     .header-gradient h2 {
       font-weight: 700;
       font-size: 1.3rem;
@@ -141,7 +128,6 @@
       text-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
       position: relative;
     }
-
     .header-gradient h2::after {
       content: "";
       display: block;
@@ -151,7 +137,6 @@
       background: rgba(255, 255, 255, 0.65);
       border-radius: 2px;
     }
-
     .header-gradient p {
       font-size: 1rem;
       opacity: 0.95;
@@ -160,7 +145,6 @@
       user-select: none;
       text-shadow: 0 1px 5px rgba(0, 0, 0, 0.12);
     }
-
     h2.form-title {
       font-size: 1.5rem;
       font-weight: 700;
@@ -169,7 +153,6 @@
       margin-bottom: 1.8rem;
       user-select: none;
     }
-
     p.form-description {
       font-size: 1rem;
       color: var(--text-muted);
@@ -178,7 +161,6 @@
       margin-bottom: 2rem;
       padding: 0 0.4rem;
     }
-
     label,
     legend,
     span.field-label {
@@ -188,7 +170,6 @@
       margin-bottom: 0.4rem;
       user-select: none;
     }
-
     .input-field,
     select,
     textarea {
@@ -204,7 +185,6 @@
       box-sizing: border-box;
       resize: vertical;
     }
-
     .input-field:focus,
     select:focus,
     textarea:focus {
@@ -212,18 +192,15 @@
       box-shadow: 0 0 20px var(--primary-purple);
       outline: none;
     }
-
     textarea {
       min-height: 110px;
       line-height: 1.5;
       font-weight: 600;
     }
-
     form#guestBookForm .form-group,
     form#guestBookForm > div {
       margin-bottom: 20px;
     }
-
     .radio-group {
       display: flex;
       flex-direction: column;
@@ -235,16 +212,13 @@
       padding-bottom: 0.5rem;
       -webkit-overflow-scrolling: touch;
     }
-
     .radio-group::-webkit-scrollbar {
       display: none;
     }
-
     .radio-group {
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-
     .radio-card {
       font-size: 1rem;
       flex: 0 0 auto;
@@ -262,7 +236,6 @@
       user-select: none;
       white-space: nowrap;
     }
-
     .radio-card input[type="radio"] {
       accent-color: var(--primary-pink);
       cursor: pointer;
@@ -270,7 +243,6 @@
       width: 24px;
       margin: 0;
     }
-
     .radio-card:hover,
     .radio-card:focus-within {
       border-color: var(--primary-pink);
@@ -278,14 +250,12 @@
       box-shadow: inset 0 0 20px rgba(255, 129, 168, 0.25);
       color: var(--primary-pink);
     }
-
     .radio-card.selected {
       border-color: var(--primary-pink);
       background: #ffbfd1;
       box-shadow: inset 0 0 25px rgba(255, 129, 168, 0.4);
       color: var(--primary-pink);
     }
-
     button.submit-btn {
       width: 100%;
       font-size: 1.15rem;
@@ -306,7 +276,6 @@
       border: none;
       margin-top: 3rem;
     }
-
     button.submit-btn:hover:not(:disabled),
     button.submit-btn:focus-visible:not(:disabled) {
       background: linear-gradient(90deg, var(--primary-purple), var(--primary-pink));
@@ -315,7 +284,6 @@
       outline-offset: 5px;
       outline: 3px solid var(--primary-purple);
     }
-
     button.submit-btn:disabled {
       background: #e7cbd9;
       box-shadow: none;
@@ -323,7 +291,6 @@
       transform: none;
       outline: none;
     }
-
     .loading-spinner {
       border: 4.5px solid #f7eafc;
       border-top: 4.5px solid var(--primary-pink);
@@ -334,17 +301,14 @@
       user-select: none;
       user-drag: none;
     }
-
     @keyframes spin {
       0% {
         transform: rotate(0deg);
       }
-
       100% {
         transform: rotate(360deg);
       }
     }
-
     footer {
       margin-top: 5rem;
       font-size: 1rem;
@@ -356,7 +320,6 @@
       line-height: 1.65;
       padding: 0 1.2rem;
     }
-
     .modal-bg {
       background: rgba(0, 0, 0, 0.45);
       position: fixed;
@@ -370,12 +333,10 @@
       user-select: none;
       user-drag: none;
     }
-
     .modal-bg.hidden {
       pointer-events: none;
       opacity: 0;
     }
-
     .modal-content {
       background: var(--bg-white);
       border-radius: var(--radius-lg);
@@ -389,20 +350,16 @@
       transition: transform 0.35s ease;
       outline: none;
     }
-
     .modal-icon {
       font-size: 5.8rem;
       margin-bottom: 2rem;
     }
-
     .modal-icon.text-success-green {
       color: var(--success-green);
     }
-
     .modal-icon.text-error-red {
       color: var(--error-red);
     }
-
     .modal-btn {
       margin-top: 3rem;
       padding: 1.3rem 5rem;
@@ -419,47 +376,42 @@
       -webkit-tap-highlight-color: transparent;
       outline-offset: 5px;
     }
-
     .modal-btn:hover,
     .modal-btn:focus-visible {
       background: var(--primary-pink);
       outline: 4px solid var(--primary-pink);
     }
-
-    /* Kamera dan Preview Foto */
     video#video {
       width: 100%;
       max-width: 320px;
+      min-height: 240px;
       border: 2px solid var(--primary-pink);
       border-radius: var(--radius-lg);
-      transform: scaleX(-1);
+      object-fit: cover;
+      aspect-ratio: 4 / 3;
+      background: #000;
+      display: block;
+    }
+    #photoPreview {
+      width: 100%;
+      max-width: 320px;
+      min-height: 240px;
+      border: 2px solid var(--primary-purple);
+      border-radius: var(--radius-lg);
+      display: none;
       object-fit: cover;
       aspect-ratio: 4 / 3;
       background: #000;
     }
-
-    #photoPreview {
-      width: 100%;
-      max-width: 320px;
-      border: 2px solid var(--primary-purple);
-      border-radius: var(--radius-lg);
-      display: none;
-      object-fit: contain;
-      aspect-ratio: 4 / 3;
-      background: #000;
-    }
-
     @media (min-width: 640px) {
       body {
         font-size: 17px;
       }
     }
-
     @media (min-width: 1024px) {
       body {
         font-size: 18px;
       }
-
       .container {
         max-width: 540px;
       }
@@ -555,17 +507,19 @@
           <label for="tujuanPengurusan"><i class="fas fa-tasks mr-2" style="color:#ff81a8;"></i>Tujuan Pengurusan *</label>
           <select id="tujuanPengurusan" name="tujuanPengurusan" class="input-field" required>
             <option value="">Pilih tujuan pengurusan</option>
-            <option value="Kakan Kementerian Agama"><b>Kakan Kementerian Agama</b></option>
-            <option value="Kasubag"><b>Kasubag</b></option>
-            <option value="Kepegawaian"><b>Kepegawaian</b></option>
-            <option value="Keuangan"><b>Keuangan</b></option>
-            <option value="Perencana"><b>Perencana</b></option>
-            <option value="Seksi Pendidikan Agama Islam (PAIS)"><b>Seksi Pendidikan Agama Islam (PAIS)</b></option>
-            <option value="Seksi Pondok Pesantren (Pontren)"><b>Seksi Pondok Pesantren (Pontren)</b></option>
-            <option value="Seksi Bimbingan Masyarakat (BIMAS)"><b>Seksi Bimbingan Masyarakat (BIMAS)</b></option>
-            <option value="Seksi Pendidikan Madrasah (PENMAD)"><b>Seksi Pendidikan Madrasah (PENMAD)</b></option>
-            <option value="Seksi Penyelenggara Haji dan Umroh (PHU)"><b>Seksi Penyelenggara Haji dan Umroh (PHU)</b></option>
-            <option value="Seksi Zakat dan Wakaf (ZAWA)"><b>Seksi Zakat dan Wakaf (ZAWA)</b></option>
+            <option value="Kakan Kementerian Agama">Kakan Kementerian Agama</option>
+            <option value="Kasubag">Kasubag</option>
+            <option value="Kepegawaian">Kepegawaian</option>
+            <option value="Keuangan">Keuangan</option>
+            <option value="Perencana">Perencana</option>
+            <option value="Seksi Pendidikan Agama Islam (PAIS)">Seksi Pendidikan Agama Islam (PAIS)</option>
+            <option value="Seksi Pondok Pesantren (Pontren)">Seksi Pondok Pesantren (Pontren)</option>
+            <option value="Seksi Bimbingan Masyarakat (BIMAS)">Seksi Bimbingan Masyarakat (BIMAS)</option>
+            <option value="Seksi Pendidikan Madrasah (PENMAD)">Seksi Pendidikan Madrasah (PENMAD)</option>
+            <option value="Seksi Penyelenggara Haji dan Umroh (PHU)">Seksi Penyelenggara Haji dan Umroh (PHU)</option>
+            <option value="Seksi Zakat dan Wakaf (ZAWA)">Seksi Zakat dan Wakaf (ZAWA)</option>
+            <option value="Humas">Humas</option>
+            <option value="Penterjemah">Penerjemah</option>
           </select>
         </div>
 
@@ -747,50 +701,53 @@
 
     async function startCamera() {
       try {
-        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" }, audio: false });
+        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user", width:600, height:450 }, audio: false });
         video.srcObject = stream;
 
         await new Promise((resolve) => {
           video.onloadedmetadata = () => resolve();
         });
       } catch (error) {
-        console.error("Gagal mengakses kamera:", error);
         alert("Tidak dapat mengakses kamera. Pastikan izin kamera diberikan.");
       }
     }
 
-    function takePhoto() {
+    function capturePhoto() {
       if (!stream) {
         alert("Kamera belum siap.");
         return;
       }
 
-      // Ukuran canvas disamakan dengan ukuran tampilan video supaya proporsional
-      const rect = video.getBoundingClientRect();
-      const width = rect.width;
-      const height = rect.height;
+      const width = 600;
+      const height = 450;
 
       canvas.width = width;
       canvas.height = height;
 
       const ctx = canvas.getContext("2d");
 
-      // Flip horizontal supaya hasil tidak mirror
-      ctx.translate(canvas.width, 0);
-      ctx.scale(-1, 1);
-
-      // drawImage dengan resize ke ukuran canvas kecil, hasil file lebih kecil juga
       ctx.drawImage(video, 0, 0, width, height);
 
-      // Konversi ke data URL JPEG dengan kualitas 0.75 (75%)
-      const imageDataURL = canvas.toDataURL("image/jpeg", 0.75);
+      const imageDataURL = canvas.toDataURL("image/jpeg", 0.8);
 
       imageDataInput.value = imageDataURL;
       photoPreview.src = imageDataURL;
       photoPreview.style.display = "block";
+      video.style.display = "none";
+
+      takePhotoBtn.textContent = "Ambil Ulang Foto";
     }
 
-    takePhotoBtn.addEventListener("click", takePhoto);
+    takePhotoBtn.addEventListener("click", () => {
+      if (photoPreview.style.display === "block") {
+        // Reset ke preview video untuk ambil ulang foto
+        photoPreview.style.display = "none";
+        video.style.display = "block";
+        takePhotoBtn.textContent = "Ambil Foto";
+      } else {
+        capturePhoto();
+      }
+    });
 
     window.addEventListener("load", startCamera);
 
@@ -885,6 +842,8 @@
         document.getElementById("instansiField").classList.add("hidden");
         document.querySelectorAll(".radio-card").forEach((card) => card.classList.remove("selected"));
         photoPreview.style.display = "none";
+        video.style.display = "block";
+        takePhotoBtn.textContent = "Ambil Foto";
         submitBtn.disabled = false;
         submitText.textContent = "SIMPAN DATA TAMU";
         loadingSpinner.classList.add("hidden");
