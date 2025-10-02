@@ -382,31 +382,33 @@
       outline: 4px solid var(--primary-yellow);
     }
     video#video {
-  width: 100%;
-  max-width: 320px;
-  height: auto; /* otomatis sesuai aspect ratio */
+  width: 100vw; /* penuh lebar layar handphone */
+  max-width: 480px; /* maksimal lebar agar tidak terlalu besar di tablet atau layar besar */
+  height: auto; /* tinggi otomatis agar proporsional */
   border: 2px solid var(--primary-green);
   border-radius: var(--radius-lg);
   object-fit: cover;
   aspect-ratio: 4 / 3;
   background: #000;
   display: block;
-  margin-bottom: 12px; /* beri jarak bawah */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* efek bayangan */
+  margin-bottom: 16px; /* jarak bawah sedikit lebih besar untuk sentuhan mobile */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
 
 #photoPreview {
-  width: 100%;
-  max-width: 320px;
-  height: auto; /* otomatis sesuai aspect ratio */
+  width: 100vw; /* penuh lebar layar handphone */
+  max-width: 480px; /* maksimal lebar agar sesuai tampilan */
+  height: auto;
   border: 2px solid var(--primary-yellow);
   border-radius: var(--radius-lg);
   display: none;
   object-fit: cover;
   aspect-ratio: 4 / 3;
   background: #000;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  margin-bottom: 16px;
 }
+
 
     @media (min-width: 640px) {
       body {
