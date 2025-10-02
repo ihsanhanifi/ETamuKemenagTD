@@ -10,16 +10,16 @@
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap");
     :root {
-      --primary-pink: #ff81a8;
-      --primary-purple: #a66cff;
-      --bg-light: #faf8f7;
+      --primary-green: #004d40;
+      --primary-yellow: #ffca28;
+      --bg-light: #e8f5e9;
       --bg-white: #ffffff;
-      --text-dark: #3c3a45;
-      --text-muted: #8a8d93;
-      --border-gray: #dcd6d6;
-      --shadow-light: rgba(172, 152, 202, 0.2);
-      --error-red: #ff5c5c;
-      --success-green: #4ad994;
+      --text-dark: #1b5e20;
+      --text-muted: #4caf50;
+      --border-gray: #c8e6c9;
+      --shadow-light: rgba(76, 175, 80, 0.2);
+      --error-red: #d32f2f;
+      --success-green: #4caf50;
       --radius-lg: 1.25rem;
       --radius-full: 9999px;
     }
@@ -53,7 +53,7 @@
       margin: 0 1rem;
     }
     .header-gradient {
-      background: linear-gradient(135deg, var(--primary-purple), var(--primary-pink));
+      background: linear-gradient(135deg, var(--primary-green), var(--primary-yellow));
       border-radius: var(--radius-lg);
       padding: 2.5rem 2rem 3.5rem;
       color: #fff;
@@ -99,7 +99,7 @@
     .header-gradient::before {
       width: 120px;
       height: 120px;
-      background: rgba(255, 129, 168, 0.35);
+      background: rgba(0, 77, 64, 0.35);
       top: -40px;
       left: -40px;
       filter: blur(40px);
@@ -107,7 +107,7 @@
     .header-gradient::after {
       width: 180px;
       height: 180px;
-      background: rgba(166, 108, 255, 0.35);
+      background: rgba(255, 202, 40, 0.35);
       bottom: -60px;
       right: -60px;
       filter: blur(50px);
@@ -188,8 +188,8 @@
     .input-field:focus,
     select:focus,
     textarea:focus {
-      border-color: var(--primary-purple);
-      box-shadow: 0 0 20px var(--primary-purple);
+      border-color: var(--primary-green);
+      box-shadow: 0 0 20px var(--primary-green);
       outline: none;
     }
     textarea {
@@ -237,7 +237,7 @@
       white-space: nowrap;
     }
     .radio-card input[type="radio"] {
-      accent-color: var(--primary-pink);
+      accent-color: var(--primary-green);
       cursor: pointer;
       height: 24px;
       width: 24px;
@@ -245,28 +245,28 @@
     }
     .radio-card:hover,
     .radio-card:focus-within {
-      border-color: var(--primary-pink);
-      background: #ffe8f0;
-      box-shadow: inset 0 0 20px rgba(255, 129, 168, 0.25);
-      color: var(--primary-pink);
+      border-color: var(--primary-green);
+      background: #dcedc8;
+      box-shadow: inset 0 0 20px rgba(76, 175, 80, 0.25);
+      color: var(--primary-green);
     }
     .radio-card.selected {
-      border-color: var(--primary-pink);
-      background: #ffbfd1;
-      box-shadow: inset 0 0 25px rgba(255, 129, 168, 0.4);
-      color: var(--primary-pink);
+      border-color: var(--primary-green);
+      background: #aed581;
+      box-shadow: inset 0 0 25px rgba(76, 175, 80, 0.4);
+      color: var(--primary-green);
     }
     button.submit-btn {
       width: 100%;
       font-size: 1.15rem;
       padding: 14px 0;
       border-radius: 28px;
-      background: linear-gradient(90deg, var(--primary-pink), var(--primary-purple));
+      background: linear-gradient(90deg, var(--primary-green), var(--primary-yellow));
       color: var(--bg-white);
       font-weight: 800;
       cursor: pointer;
       letter-spacing: 1.2px;
-      box-shadow: 0 16px 44px rgba(255, 129, 168, 0.4);
+      box-shadow: 0 16px 44px rgba(255, 202, 40, 0.4);
       transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
       display: flex;
       justify-content: center;
@@ -278,11 +278,11 @@
     }
     button.submit-btn:hover:not(:disabled),
     button.submit-btn:focus-visible:not(:disabled) {
-      background: linear-gradient(90deg, var(--primary-purple), var(--primary-pink));
-      box-shadow: 0 20px 48px rgba(166, 108, 255, 0.5);
+      background: linear-gradient(90deg, var(--primary-yellow), var(--primary-green));
+      box-shadow: 0 20px 48px rgba(255, 202, 40, 0.5);
       transform: translateY(-4px);
       outline-offset: 5px;
-      outline: 3px solid var(--primary-purple);
+      outline: 3px solid var(--primary-green);
     }
     button.submit-btn:disabled {
       background: #e7cbd9;
@@ -293,7 +293,7 @@
     }
     .loading-spinner {
       border: 4.5px solid #f7eafc;
-      border-top: 4.5px solid var(--primary-pink);
+      border-top: 4.5px solid var(--primary-green);
       border-radius: 50%;
       width: 28px;
       height: 28px;
@@ -363,7 +363,7 @@
     .modal-btn {
       margin-top: 3rem;
       padding: 1.3rem 5rem;
-      background: var(--primary-purple);
+      background: var(--primary-green);
       color: var(--bg-white);
       border-radius: 2.5rem;
       font-weight: 800;
@@ -378,14 +378,14 @@
     }
     .modal-btn:hover,
     .modal-btn:focus-visible {
-      background: var(--primary-pink);
-      outline: 4px solid var(--primary-pink);
+      background: var(--primary-yellow);
+      outline: 4px solid var(--primary-yellow);
     }
     video#video {
       width: 100%;
       max-width: 320px;
       min-height: 240px;
-      border: 2px solid var(--primary-pink);
+      border: 2px solid var(--primary-green);
       border-radius: var(--radius-lg);
       object-fit: cover;
       aspect-ratio: 4 / 3;
@@ -396,7 +396,7 @@
       width: 100%;
       max-width: 320px;
       min-height: 240px;
-      border: 2px solid var(--primary-purple);
+      border: 2px solid var(--primary-yellow);
       border-radius: var(--radius-lg);
       display: none;
       object-fit: cover;
@@ -436,13 +436,13 @@
 
       <form id="guestBookForm" novalidate>
         <div class="form-group">
-          <label for="nama"><i class="fas fa-user mr-2" style="color:#ff81a8;"></i>Nama Lengkap *</label>
+          <label for="nama"><i class="fas fa-user mr-2" style="color: var(--primary-green);"></i>Nama Lengkap *</label>
           <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap sesuai KTP" required class="input-field"
             autocomplete="name" />
         </div>
 
         <div class="form-group">
-          <span class="field-label"><i class="fas fa-building mr-2" style="color:#ff81a8;"></i>Berasal dari *</span>
+          <span class="field-label"><i class="fas fa-building mr-2" style="color: var(--primary-green);"></i>Berasal dari *</span>
           <div class="radio-group" role="radiogroup" aria-required="true">
             <div class="radio-card" onclick="selectRadio('instansi')">
               <label>
@@ -459,13 +459,33 @@
           </div>
         </div>
 
-        <div class="form-group hidden" id="instansiField">
-          <label for="namaInstansi"><i class="fas fa-university mr-2" style="color:#ff81a8;"></i>Nama Instansi *</label>
+         <div class="form-group hidden" id="instansiField">
+          <label for="namaInstansi"><i class="fas fa-university mr-2" style="color: var(--primary-green);"></i>Nama Instansi *</label>
           <input type="text" id="namaInstansi" name="namaInstansi" placeholder="Masukkan nama instansi lengkap" class="input-field" />
         </div>
 
         <div class="form-group">
-          <span class="field-label"><i class="fas fa-target mr-2" style="color:#ff81a8;"></i>Tujuan ke Kantor Kemenag Tanah Datar
+          <label for="tujuanPengurusan"><i class="fas fa-tasks mr-2" style="color: var(--primary-green);"></i>Tujuan *</label>
+          <select id="tujuanPengurusan" name="tujuanPengurusan" class="input-field" required>
+            <option value="">Pilih tujuan pengurusan</option>
+            <option value="Kakan Kementerian Agama">Kakan Kementerian Agama</option>
+            <option value="Kasubag">Kasubag</option>
+            <option value="Kepegawaian">Kepegawaian</option>
+            <option value="Keuangan">Keuangan</option>
+            <option value="Perencana">Perencana</option>
+            <option value="Seksi Pendidikan Agama Islam (PAIS)">Seksi Pendidikan Agama Islam (PAIS)</option>
+            <option value="Seksi Pondok Pesantren (Pontren)">Seksi Pondok Pesantren (Pontren)</option>
+            <option value="Seksi Bimbingan Masyarakat (BIMAS)">Seksi Bimbingan Masyarakat (BIMAS)</option>
+            <option value="Seksi Pendidikan Madrasah (PENMAD)">Seksi Pendidikan Madrasah (PENMAD)</option>
+            <option value="Seksi Penyelenggara Haji dan Umroh (PHU)">Seksi Penyelenggara Haji dan Umroh (PHU)</option>
+            <option value="Seksi Zakat dan Wakaf (ZAWA)">Seksi Zakat dan Wakaf (ZAWA)</option>
+            <option value="Humas">Humas</option>
+            <option value="Penterjemah">Penerjemah</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <span class="field-label"><i class="fas fa-target mr-2" style="color: var(--primary-green);"></i>Tujuan ke Kantor Kemenag Tanah Datar
             *</span>
 
           <div id="tujuanInstansiGroup" class="radio-group hidden" role="radiogroup" aria-required="true">
@@ -504,33 +524,13 @@
         </div>
 
         <div class="form-group">
-          <label for="tujuanPengurusan"><i class="fas fa-tasks mr-2" style="color:#ff81a8;"></i>Tujuan Pengurusan *</label>
-          <select id="tujuanPengurusan" name="tujuanPengurusan" class="input-field" required>
-            <option value="">Pilih tujuan pengurusan</option>
-            <option value="Kakan Kementerian Agama">Kakan Kementerian Agama</option>
-            <option value="Kasubag">Kasubag</option>
-            <option value="Kepegawaian">Kepegawaian</option>
-            <option value="Keuangan">Keuangan</option>
-            <option value="Perencana">Perencana</option>
-            <option value="Seksi Pendidikan Agama Islam (PAIS)">Seksi Pendidikan Agama Islam (PAIS)</option>
-            <option value="Seksi Pondok Pesantren (Pontren)">Seksi Pondok Pesantren (Pontren)</option>
-            <option value="Seksi Bimbingan Masyarakat (BIMAS)">Seksi Bimbingan Masyarakat (BIMAS)</option>
-            <option value="Seksi Pendidikan Madrasah (PENMAD)">Seksi Pendidikan Madrasah (PENMAD)</option>
-            <option value="Seksi Penyelenggara Haji dan Umroh (PHU)">Seksi Penyelenggara Haji dan Umroh (PHU)</option>
-            <option value="Seksi Zakat dan Wakaf (ZAWA)">Seksi Zakat dan Wakaf (ZAWA)</option>
-            <option value="Humas">Humas</option>
-            <option value="Penterjemah">Penerjemah</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="noHp"><i class="fas fa-phone mr-2" style="color:#ff81a8;"></i>No. Handphone/WhatsApp *</label>
+          <label for="noHp"><i class="fas fa-phone mr-2" style="color: var(--primary-green);"></i>No. Handphone/WhatsApp *</label>
           <input type="tel" id="noHp" name="noHp" placeholder="Contoh: 081234567890" required class="input-field"
             autocomplete="tel" />
         </div>
 
         <div class="form-group">
-          <label for="alamat"><i class="fas fa-map-marker-alt mr-2" style="color:#ff81a8;"></i>Alamat *</label>
+          <label for="alamat"><i class="fas fa-map-marker-alt mr-2" style="color: var(--primary-green);"></i>Alamat *</label>
           <textarea id="alamat" name="alamat" rows="3" placeholder="Masukkan alamat lengkap" required class="input-field"></textarea>
         </div>
 
