@@ -391,17 +391,17 @@
       aspect-ratio: 4 / 3;
       background: #000;
       display: block;
+       transform: scaleX(-1) !important; /* PENTING: hapus mirror */
     }
     #photoPreview {
-      width: 100%;
-      max-width: 320px;
-      min-height: 240px;
-      border: 2px solid var(--primary-yellow);
-      border-radius: var(--radius-lg);
-      display: none;
-      object-fit: cover;
-      aspect-ratio: 4 / 3;
-      background: #000;
+      width: 100%;       /* sesuaikan dengan container lebar */
+  height: auto;      /* agar proporsional */
+  max-width: 320px;  /* maksimal sesuai UI */
+  border-radius: 1.25rem;
+  border: 2px solid #ffca28;
+  object-fit: contain; /* jangan potong gambar */
+  display: none;
+  background: #000;
     }
     @media (min-width: 640px) {
       body {
@@ -459,7 +459,7 @@
           </div>
         </div>
 
-         <div class="form-group hidden" id="instansiField">
+        <div class="form-group hidden" id="instansiField">
           <label for="namaInstansi"><i class="fas fa-university mr-2" style="color: var(--primary-green);"></i>Nama Instansi *</label>
           <input type="text" id="namaInstansi" name="namaInstansi" placeholder="Masukkan nama instansi lengkap" class="input-field" />
         </div>
@@ -691,7 +691,7 @@
       });
     });
 
-    // Kamera dan Foto
+    // Kamera dan Foto, tanpa mirror
     const video = document.getElementById("video");
     const canvas = document.getElementById("canvas");
     const photoPreview = document.getElementById("photoPreview");
@@ -701,7 +701,16 @@
 
     async function startCamera() {
       try {
-        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user", width:600, height:450 }, audio: false });
+        const isMobile = /android|iphone|ipad|mobile/i.test(navigator.userAgent);
+        const constraints = {
+          video: {
+            facingMode: isMobile ? { exact: "user" } : "environment",
+            width: { ideal: 600 },
+            height: { ideal: 450 }
+          },
+          audio: false
+        };
+        stream = await navigator.mediaDevices.getUserMedia(constraints);
         video.srcObject = stream;
 
         await new Promise((resolve) => {
@@ -713,34 +722,46 @@
     }
 
     function capturePhoto() {
-      if (!stream) {
-        alert("Kamera belum siap.");
-        return;
-      }
+  if (!stream) {
+    alert("Kamera belum siap.");
+    return;
+  }
+  const width = video.videoWidth;
+  const height = video.videoHeight;
+  canvas.width = width;
+  canvas.height = height;
 
-      const width = 600;
-      const height = 450;
+  const ctx = canvas.getContext("2d");
 
-      canvas.width = width;
-      canvas.height = height;
+  // Cek apakah kamera depan dipakai
+  const isFrontCamera = stream.getVideoTracks()[0].getSettings().facingMode === "user";
 
-      const ctx = canvas.getContext("2d");
+  ctx.save();
 
-      ctx.drawImage(video, 0, 0, width, height);
+  if (isFrontCamera) {
+    // Flip horizontal canvas untuk koreksi mirror kamera depan
+    ctx.translate(width, 0);
+    ctx.scale(-1, 1);
+  } else {
+    // Kamera belakang / laptop normal
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+  }
 
-      const imageDataURL = canvas.toDataURL("image/jpeg", 0.8);
+  ctx.drawImage(video, 0, 0, width, height);
+  ctx.restore();
 
-      imageDataInput.value = imageDataURL;
-      photoPreview.src = imageDataURL;
-      photoPreview.style.display = "block";
-      video.style.display = "none";
+  const imageDataURL = canvas.toDataURL("image/jpeg", 0.9);
+  imageDataInput.value = imageDataURL;
+  photoPreview.src = imageDataURL;
+  photoPreview.style.display = "block";
+  video.style.display = "none";
 
-      takePhotoBtn.textContent = "Ambil Ulang Foto";
-    }
+  takePhotoBtn.textContent = "Ambil Ulang Foto";
+}
+
 
     takePhotoBtn.addEventListener("click", () => {
       if (photoPreview.style.display === "block") {
-        // Reset ke preview video untuk ambil ulang foto
         photoPreview.style.display = "none";
         video.style.display = "block";
         takePhotoBtn.textContent = "Ambil Foto";
@@ -790,6 +811,10 @@
         showErrorModal("Validation Error", "Alamat harus diisi");
         return;
       }
+      if (!imageDataInput.value) {
+        showErrorModal("Validation Error", "Foto harus diambil");
+        return;
+      }
 
       let tujuanKantorValue = tujuanKantorRadio.value;
       if (tujuanKantorValue === "Lainnya") {
@@ -824,7 +849,7 @@
         tujuan_pengurusan: tujuanPengurusan,
         no_hp: noHp,
         alamat: alamat,
-        foto: imageDataInput.value || "",
+        foto: imageDataInput.value,
       };
 
       try {
