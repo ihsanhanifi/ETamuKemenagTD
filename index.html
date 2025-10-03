@@ -416,6 +416,42 @@
         max-width: 540px;
       }
     }
+
+    @media (max-width: 600px) {
+  /* Perkecil logo */
+  .logo-container {
+    width: 80px !important;
+    height: 80px !important;
+    padding: 10px !important;
+    margin-bottom: 1rem !important;
+    border: 2px solid rgba(255, 255, 255, 0.5) !important;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.35) !important;
+  }
+  /* Tampilkan hanya tulisan "Kantor Kementerian Agama" */
+  .header-gradient h1 {
+    display: none;
+  }
+  .header-gradient h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    letter-spacing: 1px;
+  }
+  .header-gradient h2::after {
+    width: 0;
+    height: 0;
+    margin: 0;
+    background: none;
+  }
+  .header-gradient p {
+    display: none;
+  }
+  /* Kurangi padding header */
+  .header-gradient {
+    padding: 1rem 1rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+}
   </style>
 </head>
 
@@ -425,8 +461,8 @@
       <div class="logo-container" aria-hidden="true">
         <img src="LKTD.png" alt="Logo Kementerian Agama Republik Indonesia" />
       </div>
-      <h1>KEMENTERIAN AGAMA REPUBLIK INDONESIA</h1>
-      <h2>KANTOR KABUPATEN TANAH DATAR</h2>
+      <h1>KANTOR KEMENTERIAN AGAMA REPUBLIK INDONESIA</h1>
+      <h2>KABUPATEN TANAH DATAR</h2>
       <p>Jl. M.Yamin Bukit Gombak Batusangkar, Tanah Datar, Sumatera Barat</p>
     </header>
 
@@ -473,15 +509,14 @@
             <option value="Kepegawaian">Kepegawaian</option>
             <option value="Keuangan">Keuangan</option>
             <option value="Perencana">Perencana</option>
-            <option value="Humas">Humas</option>
-            <option value="Penterjemah">Penerjemah</option>
             <option value="Seksi Pendidikan Agama Islam (PAIS)">Seksi Pendidikan Agama Islam (PAIS)</option>
             <option value="Seksi Pondok Pesantren (Pontren)">Seksi Pondok Pesantren (Pontren)</option>
             <option value="Seksi Bimbingan Masyarakat (BIMAS)">Seksi Bimbingan Masyarakat (BIMAS)</option>
             <option value="Seksi Pendidikan Madrasah (PENMAD)">Seksi Pendidikan Madrasah (PENMAD)</option>
             <option value="Seksi Penyelenggara Haji dan Umroh (PHU)">Seksi Penyelenggara Haji dan Umroh (PHU)</option>
             <option value="Seksi Zakat dan Wakaf (ZAWA)">Seksi Zakat dan Wakaf (ZAWA)</option>
-            
+            <option value="Humas">Humas</option>
+            <option value="Penterjemah">Penerjemah</option>
           </select>
         </div>
 
@@ -908,4 +943,3 @@
 </body>
 
 </html>
-
