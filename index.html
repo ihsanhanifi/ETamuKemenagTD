@@ -391,17 +391,17 @@
       aspect-ratio: 4 / 3;
       background: #000;
       display: block;
-       transform: scaleX(-1) !important; /* PENTING: hapus mirror */
+      transform: scaleX(-1) !important; /* PENTING: hapus mirror */
     }
     #photoPreview {
       width: 100%;       /* sesuaikan dengan container lebar */
-  height: auto;      /* agar proporsional */
-  max-width: 320px;  /* maksimal sesuai UI */
-  border-radius: 1.25rem;
-  border: 2px solid #ffca28;
-  object-fit: contain; /* jangan potong gambar */
-  display: none;
-  background: #000;
+      height: auto;      /* agar proporsional */
+      max-width: 320px;  /* maksimal sesuai UI */
+      border-radius: 1.25rem;
+      border: 2px solid #ffca28;
+      object-fit: contain; /* jangan potong gambar */
+      display: none;
+      background: #000;
     }
     @media (min-width: 640px) {
       body {
@@ -418,40 +418,40 @@
     }
 
     @media (max-width: 600px) {
-  /* Perkecil logo */
-  .logo-container {
-    width: 80px !important;
-    height: 80px !important;
-    padding: 10px !important;
-    margin-bottom: 1rem !important;
-    border: 2px solid rgba(255, 255, 255, 0.5) !important;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.35) !important;
-  }
-  /* Tampilkan hanya tulisan "Kantor Kementerian Agama" */
-  .header-gradient h1 {
-    display: none;
-  }
-  .header-gradient h2 {
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-    letter-spacing: 1px;
-  }
-  .header-gradient h2::after {
-    width: 0;
-    height: 0;
-    margin: 0;
-    background: none;
-  }
-  .header-gradient p {
-    display: none;
-  }
-  /* Kurangi padding header */
-  .header-gradient {
-    padding: 1rem 1rem 1.5rem;
-    margin-bottom: 2rem;
-  }
-}
+      /* Perkecil logo */
+      .logo-container {
+        width: 80px !important;
+        height: 80px !important;
+        padding: 10px !important;
+        margin-bottom: 1rem !important;
+        border: 2px solid rgba(255, 255, 255, 0.5) !important;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.35) !important;
+      }
+      /* Tampilkan hanya tulisan "Kantor Kementerian Agama" */
+      .header-gradient h1 {
+        display: none;
+      }
+      .header-gradient h2 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+        letter-spacing: 1px;
+      }
+      .header-gradient h2::after {
+        width: 0;
+        height: 0;
+        margin: 0;
+        background: none;
+      }
+      .header-gradient p {
+        display: none;
+      }
+      /* Kurangi padding header */
+      .header-gradient {
+        padding: 1rem 1rem 1.5rem;
+        margin-bottom: 2rem;
+      }
+    }
   </style>
 </head>
 
@@ -571,13 +571,13 @@
         </div>
 
         <div class="form-group">
-          <label>Foto Otomatis (Menggunakan Kamera)</label>
+          <label>Foto Otomatis (Menggunakan Kamera, Opsional)</label>
           <div class="flex flex-col items-center gap-3">
             <video id="video" autoplay playsinline></video>
             <button type="button" id="takePhotoBtn" class="submit-btn" style="width: auto; padding: 0.6rem 1.2rem; font-size: 1rem;">
               Ambil Foto
             </button>
-            <canvas id="canvas" style="display: none;"></canvas>
+            nvas id="canvas" style="display: noneone;"></canvas>
             <img id="photoPreview" alt="Pratinjau Foto" class="rounded-lg" />
             <input type="hidden" id="imageData" name="imageData" />
           </div>
@@ -758,49 +758,49 @@
     }
 
     function capturePhoto() {
-  if (!stream) {
-    alert("Kamera belum siap.");
-    return;
-  }
-  const width = video.videoWidth;
-  const height = video.videoHeight;
-  canvas.width = width;
-  canvas.height = height;
+      if (!stream) {
+        alert("Kamera belum siap.");
+        return;
+      }
+      const width = video.videoWidth;
+      const height = video.videoHeight;
+      canvas.width = width;
+      canvas.height = height;
 
-  const ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext("2d");
 
-  // Cek apakah kamera depan dipakai
-  const isFrontCamera = stream.getVideoTracks()[0].getSettings().facingMode === "user";
+      // Cek apakah kamera depan dipakai
+      const isFrontCamera = stream.getVideoTracks()[0].getSettings().facingMode === "user";
 
-  ctx.save();
+      ctx.save();
 
-  if (isFrontCamera) {
-    // Flip horizontal canvas untuk koreksi mirror kamera depan
-    ctx.translate(width, 0);
-    ctx.scale(-1, 1);
-  } else {
-    // Kamera belakang / laptop normal
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-  }
+      if (isFrontCamera) {
+        // Flip horizontal canvas untuk koreksi mirror kamera depan
+        ctx.translate(width, 0);
+        ctx.scale(-1, 1);
+      } else {
+        // Kamera belakang / laptop normal
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+      }
 
-  ctx.drawImage(video, 0, 0, width, height);
-  ctx.restore();
+      ctx.drawImage(video, 0, 0, width, height);
+      ctx.restore();
 
-  const imageDataURL = canvas.toDataURL("image/jpeg", 0.9);
-  imageDataInput.value = imageDataURL;
-  photoPreview.src = imageDataURL;
-  photoPreview.style.display = "block";
-  video.style.display = "none";
+      const imageDataURL = canvas.toDataURL("image/jpeg", 0.9);
+      imageDataInput.value = imageDataURL;
+      photoPreview.src = imageDataURL;
+      photoPreview.style.display = "block";
+      video.style.display = "none";
 
-  takePhotoBtn.textContent = "Ambil Ulang Foto";
-}
-
+      takePhotoBtn.textContent = "Ambil Ulang Foto";
+    }
 
     takePhotoBtn.addEventListener("click", () => {
       if (photoPreview.style.display === "block") {
         photoPreview.style.display = "none";
         video.style.display = "block";
         takePhotoBtn.textContent = "Ambil Foto";
+        imageDataInput.value = ""; // reset foto jika ambil ulang
       } else {
         capturePhoto();
       }
@@ -847,10 +847,8 @@
         showErrorModal("Validation Error", "Alamat harus diisi");
         return;
       }
-      if (!imageDataInput.value) {
-        showErrorModal("Validation Error", "Foto harus diambil");
-        return;
-      }
+      
+      // Validasi foto dihapus sehingga foto menjadi opsional
 
       let tujuanKantorValue = tujuanKantorRadio.value;
       if (tujuanKantorValue === "Lainnya") {
@@ -885,7 +883,7 @@
         tujuan_pengurusan: tujuanPengurusan,
         no_hp: noHp,
         alamat: alamat,
-        foto: imageDataInput.value,
+        foto: imageDataInput.value || "",  // tetap kirim foto jika ada, tapi opsional
       };
 
       try {
@@ -905,6 +903,7 @@
         photoPreview.style.display = "none";
         video.style.display = "block";
         takePhotoBtn.textContent = "Ambil Foto";
+        imageDataInput.value = "";
         submitBtn.disabled = false;
         submitText.textContent = "SIMPAN DATA TAMU";
         loadingSpinner.classList.add("hidden");
@@ -943,4 +942,3 @@
 </body>
 
 </html>
-
