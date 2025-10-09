@@ -394,12 +394,12 @@
       transform: scaleX(-1) !important; /* PENTING: hapus mirror */
     }
     #photoPreview {
-      width: 100%;       /* sesuaikan dengan container lebar */
-      height: auto;      /* agar proporsional */
-      max-width: 320px;  /* maksimal sesuai UI */
+      width: 100%;
+      height: auto;
+      max-width: 320px;
       border-radius: 1.25rem;
       border: 2px solid #ffca28;
-      object-fit: contain; /* jangan potong gambar */
+      object-fit: contain;
       display: none;
       background: #000;
     }
@@ -416,9 +416,7 @@
         max-width: 540px;
       }
     }
-
     @media (max-width: 600px) {
-      /* Perkecil logo */
       .logo-container {
         width: 80px !important;
         height: 80px !important;
@@ -427,7 +425,6 @@
         border: 2px solid rgba(255, 255, 255, 0.5) !important;
         box-shadow: 0 0 20px rgba(255, 255, 255, 0.35) !important;
       }
-      /* Tampilkan hanya tulisan "Kantor Kementerian Agama" */
       .header-gradient h1 {
         display: none;
       }
@@ -446,7 +443,6 @@
       .header-gradient p {
         display: none;
       }
-      /* Kurangi padding header */
       .header-gradient {
         padding: 1rem 1rem 1.5rem;
         margin-bottom: 2rem;
@@ -473,8 +469,7 @@
       <form id="guestBookForm" novalidate>
         <div class="form-group">
           <label for="nama"><i class="fas fa-user mr-2" style="color: var(--primary-green);"></i>Nama Lengkap *</label>
-          <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap sesuai KTP" required class="input-field"
-            autocomplete="name" />
+          <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap sesuai KTP" required class="input-field" autocomplete="name" />
         </div>
 
         <div class="form-group">
@@ -521,9 +516,7 @@
         </div>
 
         <div class="form-group">
-          <span class="field-label"><i class="fas fa-target mr-2" style="color: var(--primary-green);"></i>Tujuan ke Kantor Kemenag Tanah Datar
-            *</span>
-
+          <span class="field-label"><i class="fas fa-target mr-2" style="color: var(--primary-green);"></i>Tujuan ke Kantor Kemenag Tanah Datar *</span>
           <div id="tujuanInstansiGroup" class="radio-group hidden" role="radiogroup" aria-required="true">
             <span class="field-label font-semibold mb-1"><b>Untuk Instansi</b></span>
             <div class="radio-card" onclick="selectTujuanKantor('Rapat Koordinasi')">
@@ -540,7 +533,6 @@
             </div>
             <input id="tujuanKantorManualInstansi" type="text" class="input-field hidden mt-3" placeholder="Tulis tujuan lain..." />
           </div>
-
           <div id="tujuanUmumGroup" class="radio-group hidden" role="radiogroup" aria-required="true">
             <span class="field-label font-semibold mb-1"><b>Untuk Masyarakat Umum</b></span>
             <div class="radio-card" onclick="selectTujuanKantor('Konsultasi Agama')">
@@ -561,8 +553,7 @@
 
         <div class="form-group">
           <label for="noHp"><i class="fas fa-phone mr-2" style="color: var(--primary-green);"></i>No. Handphone/WhatsApp *</label>
-          <input type="tel" id="noHp" name="noHp" placeholder="Contoh: 081234567890" required class="input-field"
-            autocomplete="tel" />
+          <input type="tel" id="noHp" name="noHp" placeholder="Contoh: 081234567890" required class="input-field" autocomplete="tel" />
         </div>
 
         <div class="form-group">
@@ -577,7 +568,7 @@
             <button type="button" id="takePhotoBtn" class="submit-btn" style="width: auto; padding: 0.6rem 1.2rem; font-size: 1rem;">
               Ambil Foto
             </button>
-            nvas id="canvas" style="display: noneone;"></canvas>
+            <canvas id="canvas" style="display: none;"></canvas>
             <img id="photoPreview" alt="Pratinjau Foto" class="rounded-lg" />
             <input type="hidden" id="imageData" name="imageData" />
           </div>
@@ -598,8 +589,7 @@
   </div>
 
   <!-- Modal Success -->
-  <div id="successModal" class="modal-bg hidden" role="dialog" aria-modal="true" aria-labelledby="successTitle"
-    aria-describedby="successDesc">
+  <div id="successModal" class="modal-bg hidden" role="dialog" aria-modal="true" aria-labelledby="successTitle" aria-describedby="successDesc">
     <div class="modal-content" tabindex="-1">
       <div class="modal-icon text-success-green">
         <i class="fas fa-check-circle"></i>
@@ -611,8 +601,7 @@
   </div>
 
   <!-- Modal Error -->
-  <div id="errorModal" class="modal-bg hidden" role="alertdialog" aria-modal="true" aria-labelledby="errorTitle"
-    aria-describedby="errorMessage">
+  <div id="errorModal" class="modal-bg hidden" role="alertdialog" aria-modal="true" aria-labelledby="errorTitle" aria-describedby="errorMessage">
     <div class="modal-content" tabindex="-1">
       <div class="modal-icon text-error-red">
         <i class="fas fa-exclamation-circle"></i>
@@ -727,7 +716,7 @@
       });
     });
 
-    // Kamera dan Foto, tanpa mirror
+    // Kamera dan Foto tanpa mirror
     const video = document.getElementById("video");
     const canvas = document.getElementById("canvas");
     const photoPreview = document.getElementById("photoPreview");
@@ -800,7 +789,7 @@
         photoPreview.style.display = "none";
         video.style.display = "block";
         takePhotoBtn.textContent = "Ambil Foto";
-        imageDataInput.value = ""; // reset foto jika ambil ulang
+        imageDataInput.value = "";
       } else {
         capturePhoto();
       }
@@ -847,7 +836,6 @@
         showErrorModal("Validation Error", "Alamat harus diisi");
         return;
       }
-      
       // Validasi foto dihapus sehingga foto menjadi opsional
 
       let tujuanKantorValue = tujuanKantorRadio.value;
@@ -883,7 +871,7 @@
         tujuan_pengurusan: tujuanPengurusan,
         no_hp: noHp,
         alamat: alamat,
-        foto: imageDataInput.value || "",  // tetap kirim foto jika ada, tapi opsional
+        foto: imageDataInput.value || "",
       };
 
       try {
