@@ -515,40 +515,10 @@
           </select>
         </div>
 
+        <!-- Kolom Tujuan ke Kantor diubah menjadi input teks manual dan opsional -->
         <div class="form-group">
-          <span class="field-label"><i class="fas fa-target mr-2" style="color: var(--primary-green);"></i>Tujuan ke Kantor Kemenag Tanah Datar *</span>
-          <div id="tujuanInstansiGroup" class="radio-group hidden" role="radiogroup" aria-required="true">
-            <span class="field-label font-semibold mb-1"><b>Untuk Instansi</b></span>
-            <div class="radio-card" onclick="selectTujuanKantor('Rapat Koordinasi')">
-              <label><input type="radio" name="tujuanKantor" value="Rapat Koordinasi" />Rapat Koordinasi</label>
-            </div>
-            <div class="radio-card" onclick="selectTujuanKantor('Pengajuan Kerjasama')">
-              <label><input type="radio" name="tujuanKantor" value="Pengajuan Kerjasama" />Pengajuan Kerjasama</label>
-            </div>
-            <div class="radio-card" onclick="selectTujuanKantor('Pengambilan Dokumen')">
-              <label><input type="radio" name="tujuanKantor" value="Pengambilan Dokumen" />Pengambilan Dokumen</label>
-            </div>
-            <div class="radio-card" onclick="selectTujuanKantor('Lainnya')">
-              <label><input type="radio" name="tujuanKantor" value="Lainnya" />Lainnya</label>
-            </div>
-            <input id="tujuanKantorManualInstansi" type="text" class="input-field hidden mt-3" placeholder="Tulis tujuan lain..." />
-          </div>
-          <div id="tujuanUmumGroup" class="radio-group hidden" role="radiogroup" aria-required="true">
-            <span class="field-label font-semibold mb-1"><b>Untuk Masyarakat Umum</b></span>
-            <div class="radio-card" onclick="selectTujuanKantor('Konsultasi Agama')">
-              <label><input type="radio" name="tujuanKantor" value="Konsultasi Agama" />Konsultasi Agama</label>
-            </div>
-            <div class="radio-card" onclick="selectTujuanKantor('Pengurusan Surat Nikah')">
-              <label><input type="radio" name="tujuanKantor" value="Pengurusan Surat Nikah" />Pengurusan Surat Nikah</label>
-            </div>
-            <div class="radio-card" onclick="selectTujuanKantor('Pengurusan Haji dan Umroh')">
-              <label><input type="radio" name="tujuanKantor" value="Pengurusan Haji dan Umroh" />Pengurusan Haji dan Umroh</label>
-            </div>
-            <div class="radio-card" onclick="selectTujuanKantor('Lainnya')">
-              <label><input type="radio" name="tujuanKantor" value="Lainnya" />Lainnya</label>
-            </div>
-            <input id="tujuanKantorManualUmum" type="text" class="input-field hidden mt-3" placeholder="Tulis tujuan lain..." />
-          </div>
+          <label for="tujuanKantorManual"><i class="fas fa-target mr-2" style="color: var(--primary-green);"></i>Tujuan ke Kantor Kemenag Tanah Datar (Opsional)</label>
+          <input type="text" id="tujuanKantorManual" name="tujuanKantorManual" placeholder="Tuliskan tujuan ke kantor (opsional)" class="input-field" />
         </div>
 
         <div class="form-group">
@@ -556,9 +526,10 @@
           <input type="tel" id="noHp" name="noHp" placeholder="Contoh: 081234567890" required class="input-field" autocomplete="tel" />
         </div>
 
+        <!-- Kolom alamat dihilangkan required-nya sehingga opsional -->
         <div class="form-group">
-          <label for="alamat"><i class="fas fa-map-marker-alt mr-2" style="color: var(--primary-green);"></i>Alamat *</label>
-          <textarea id="alamat" name="alamat" rows="3" placeholder="Masukkan alamat lengkap" required class="input-field"></textarea>
+          <label for="alamat"><i class="fas fa-map-marker-alt mr-2" style="color: var(--primary-green);"></i>Alamat (Opsional)</label>
+          <textarea id="alamat" name="alamat" rows="3" placeholder="Masukkan alamat lengkap (opsional)" class="input-field"></textarea>
         </div>
 
         <div class="form-group">
@@ -589,19 +560,22 @@
   </div>
 
   <!-- Modal Success -->
-  <div id="successModal" class="modal-bg hidden" role="dialog" aria-modal="true" aria-labelledby="successTitle" aria-describedby="successDesc">
+  <div id="successModal" class="modal-bg hidden" role="dialog" aria-modal="true" aria-labelledby="successTitle"
+    aria-describedby="successDesc">
     <div class="modal-content" tabindex="-1">
       <div class="modal-icon text-success-green">
         <i class="fas fa-check-circle"></i>
       </div>
       <h3 id="successTitle" class="text-xl font-bold text-gray-800 mb-2">Data Berhasil Disimpan!</h3>
-      <p id="successDesc" class="text-gray-600 mb-6">Terima kasih telah mengisi buku tamu digital kami. Data Anda telah tercatat dengan baik.</p>
+      <p id="successDesc" class="text-gray-600 mb-6">Terima kasih telah mengisi buku tamu digital kami. Data Anda telah
+        tercatat dengan baik.</p>
       <button onclick="closeModal()" class="modal-btn" aria-label="Tutup">Tutup</button>
     </div>
   </div>
 
   <!-- Modal Error -->
-  <div id="errorModal" class="modal-bg hidden" role="alertdialog" aria-modal="true" aria-labelledby="errorTitle" aria-describedby="errorMessage">
+  <div id="errorModal" class="modal-bg hidden" role="alertdialog" aria-modal="true" aria-labelledby="errorTitle"
+    aria-describedby="errorMessage">
     <div class="modal-content" tabindex="-1">
       <div class="modal-icon text-error-red">
         <i class="fas fa-exclamation-circle"></i>
@@ -633,88 +607,13 @@
         document.getElementById("instansiField").classList.remove("hidden");
         document.getElementById("namaInstansi").setAttribute("required", "required");
         document.getElementById("alamat").placeholder = "Masukkan alamat kantor instansi";
-
-        toggleTujuanGroups("instansi");
       } else {
         document.querySelector(".radio-card:nth-child(2)").classList.add("selected");
         document.getElementById("instansiField").classList.add("hidden");
         document.getElementById("namaInstansi").removeAttribute("required");
         document.getElementById("alamat").placeholder = "Masukkan alamat pribadi";
-
-        toggleTujuanGroups("umum");
       }
     }
-
-    function toggleTujuanGroups(type) {
-      if (type === "instansi") {
-        document.getElementById("tujuanInstansiGroup").classList.remove("hidden");
-        document.getElementById("tujuanUmumGroup").classList.add("hidden");
-      } else {
-        document.getElementById("tujuanInstansiGroup").classList.add("hidden");
-        document.getElementById("tujuanUmumGroup").classList.remove("hidden");
-      }
-    }
-
-    function selectTujuanKantor(value) {
-      const radios = document.querySelectorAll('input[name="tujuanKantor"]');
-      radios.forEach((radio) => {
-        radio.checked = radio.value === value;
-      });
-
-      document.querySelectorAll("#tujuanInstansiGroup .radio-card, #tujuanUmumGroup .radio-card").forEach((card) =>
-        card.classList.remove("selected")
-      );
-
-      const selectedCard = Array.from(document.querySelectorAll('input[name="tujuanKantor"]')).find((radio) => radio.checked)
-        ?.closest(".radio-card");
-
-      if (selectedCard) selectedCard.classList.add("selected");
-
-      const manualInstansi = document.getElementById("tujuanKantorManualInstansi");
-      const manualUmum = document.getElementById("tujuanKantorManualUmum");
-
-      if (value === "Lainnya") {
-        if (!document.getElementById("tujuanInstansiGroup").classList.contains("hidden")) {
-          manualInstansi.classList.remove("hidden");
-          manualInstansi.setAttribute("required", "required");
-        } else {
-          manualInstansi.classList.add("hidden");
-          manualInstansi.removeAttribute("required");
-        }
-
-        if (!document.getElementById("tujuanUmumGroup").classList.contains("hidden")) {
-          manualUmum.classList.remove("hidden");
-          manualUmum.setAttribute("required", "required");
-        } else {
-          manualUmum.classList.add("hidden");
-          manualUmum.removeAttribute("required");
-        }
-      } else {
-        manualInstansi.classList.add("hidden");
-        manualInstansi.removeAttribute("required");
-        manualUmum.classList.add("hidden");
-        manualUmum.removeAttribute("required");
-      }
-    }
-
-    document.querySelectorAll('input[name="asal"]').forEach((radio) => {
-      radio.addEventListener("change", function () {
-        if (this.value === "Instansi") {
-          selectRadio("instansi");
-        } else {
-          selectRadio("umum");
-        }
-      });
-    });
-
-    document.querySelectorAll("#tujuanInstansiGroup .radio-card, #tujuanUmumGroup .radio-card").forEach((card) => {
-      card.addEventListener("click", () => {
-        const input = card.querySelector('input[name="tujuanKantor"]');
-        if (input) {
-          selectTujuanKantor(input.value);
-        }
-      });
-    });
 
     // Kamera dan Foto tanpa mirror
     const video = document.getElementById("video");
@@ -729,9 +628,15 @@
         const isMobile = /android|iphone|ipad|mobile/i.test(navigator.userAgent);
         const constraints = {
           video: {
-            facingMode: isMobile ? { exact: "user" } : "environment",
-            width: { ideal: 600 },
-            height: { ideal: 450 }
+            facingMode: isMobile ? {
+              exact: "user"
+            } : "environment",
+            width: {
+              ideal: 600
+            },
+            height: {
+              ideal: 450
+            }
           },
           audio: false
         };
@@ -803,8 +708,8 @@
       const nama = document.getElementById("nama").value.trim();
       const asal = document.querySelector('input[name="asal"]:checked');
       const namaInstansi = document.getElementById("namaInstansi").value.trim();
-      const tujuanKantorRadio = document.querySelector('input[name="tujuanKantor"]:checked');
       const tujuanPengurusan = document.getElementById("tujuanPengurusan").value;
+      const tujuanKantorManual = document.getElementById("tujuanKantorManual").value.trim();
       const noHp = document.getElementById("noHp").value.trim();
       const alamat = document.getElementById("alamat").value.trim();
 
@@ -820,10 +725,6 @@
         showErrorModal("Validation Error", "Nama instansi harus diisi");
         return;
       }
-      if (!tujuanKantorRadio) {
-        showErrorModal("Validation Error", "Silakan pilih tujuan ke kantor Kemenag");
-        return;
-      }
       if (!tujuanPengurusan) {
         showErrorModal("Validation Error", "Silakan pilih tujuan pengurusan");
         return;
@@ -831,28 +732,6 @@
       if (!noHp) {
         showErrorModal("Validation Error", "Nomor handphone harus diisi");
         return;
-      }
-      if (!alamat) {
-        showErrorModal("Validation Error", "Alamat harus diisi");
-        return;
-      }
-      // Validasi foto dihapus sehingga foto menjadi opsional
-
-      let tujuanKantorValue = tujuanKantorRadio.value;
-      if (tujuanKantorValue === "Lainnya") {
-        if (!document.getElementById("tujuanInstansiGroup").classList.contains("hidden")) {
-          tujuanKantorValue = document.getElementById("tujuanKantorManualInstansi").value.trim();
-          if (!tujuanKantorValue) {
-            showErrorModal("Validation Error", "Silakan isi tujuan lainnya");
-            return;
-          }
-        } else if (!document.getElementById("tujuanUmumGroup").classList.contains("hidden")) {
-          tujuanKantorValue = document.getElementById("tujuanKantorManualUmum").value.trim();
-          if (!tujuanKantorValue) {
-            showErrorModal("Validation Error", "Silakan isi tujuan lainnya");
-            return;
-          }
-        }
       }
 
       const submitBtn = document.getElementById("submitBtn");
@@ -867,10 +746,10 @@
         nama: nama,
         asal: asal.value,
         nama_instansi: asal.value === "Instansi" ? namaInstansi : "-",
-        tujuan_kantor: tujuanKantorValue,
+        tujuan_kantor: tujuanKantorManual || "-",
         tujuan_pengurusan: tujuanPengurusan,
         no_hp: noHp,
-        alamat: alamat,
+        alamat: alamat || "-",
         foto: imageDataInput.value || "",
       };
 
