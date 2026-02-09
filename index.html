@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -416,6 +417,22 @@
         max-width: 540px;
       }
     }
+
+    /* Rating Stars */
+.rating-star {
+  color: #c8e6c9;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+
+.rating-star:hover {
+  transform: scale(1.2);
+}
+
+.rating-star.active {
+  color: var(--primary-yellow);
+}
+
     @media (max-width: 600px) {
       .logo-container {
         width: 80px !important;
@@ -546,6 +563,31 @@
           </div>
         </div>
 
+          <!-- Rating Bintang -->
+<div class="form-group">
+  <label>
+    <i class="fas fa-star mr-2" style="color: var(--primary-yellow);"></i>
+    Rating Pelayanan *
+  </label>
+
+  <div id="ratingStars" class="flex justify-center gap-3 text-3xl mt-2">
+    <i class="fa-star fas rating-star" data-value="1"></i>
+    <i class="fa-star fas rating-star" data-value="2"></i>
+    <i class="fa-star fas rating-star" data-value="3"></i>
+    <i class="fa-star fas rating-star" data-value="4"></i>
+    <i class="fa-star fas rating-star" data-value="5"></i>
+  </div>
+
+  <p class="text-center mt-2 text-sm text-green-700 font-semibold">
+    <span id="ratingText">Belum diberi rating</span>
+  </p>
+
+
+
+  <!-- Hidden Input untuk dikirim -->
+  <input type="hidden" id="ratingValue" name="ratingValue" required />
+</div>
+
         <button type="submit" class="submit-btn" id="submitBtn" aria-label="Simpan Data Tamu">
           <span id="submitText">SIMPAN DATA TAMU</span>
           <div id="loadingSpinner" class="loading-spinner hidden" aria-hidden="true"></div>
@@ -587,9 +629,14 @@
     </div>
   </div>
 
+
+
+ 
+
+
   <script>
     const GOOGLE_SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycbxYhDLJ5ApWTarCwccrABMkMn7q-uFkwJ1ypJ1MZyLmor3aEFqU0GgPxrDv4c1EZqZDTg/exec";
+      "https://script.google.com/macros/s/AKfycbxuzhQBq3bxefHtq3LREuFJ2u5tasZw-QGwB3Z1N3bh35KmgjGOXWMrfWGn1pRGrF5TVw/exec";
 
     function selectRadio(type) {
       const radios = document.querySelectorAll('input[name="asal"]');
@@ -701,6 +748,8 @@
       }
     });
 
+
+
     window.addEventListener("load", startCamera);
 
     document.getElementById("guestBookForm").addEventListener("submit", async function (e) {
@@ -735,6 +784,12 @@
         return;
       }
 
+      if (!ratingValueInput.value) {
+  showErrorModal("Validation Error", "Silakan berikan rating pelayanan terlebih dahulu ⭐");
+  return;
+}
+
+
       const submitBtn = document.getElementById("submitBtn");
       const submitText = document.getElementById("submitText");
       const loadingSpinner = document.getElementById("loadingSpinner");
@@ -744,15 +799,18 @@
       loadingSpinner.classList.remove("hidden");
 
       const formData = {
-        nama: nama,
-        asal: asal.value,
-        nama_instansi: asal.value === "Instansi" ? namaInstansi : "-",
-        tujuan_kantor: tujuanKantorManual || "-",
-        tujuan_pengurusan: tujuanPengurusan,
-        no_hp: noHp,
-        alamat: alamat || "-",
-        foto: imageDataInput.value || "",
-      };
+  nama: nama,
+  asal: asal.value,
+  nama_instansi: asal.value === "Instansi" ? namaInstansi : "-",
+  tujuan_kantor: tujuanKantorManual || "-",
+  tujuan_pengurusan: tujuanPengurusan,
+  no_hp: noHp,
+  alamat: alamat || "-",
+  foto: imageDataInput.value || "",
+
+  rating: ratingValueInput.value || "-",   // ⭐ Tambahan Rating
+};
+
 
       try {
         await fetch(GOOGLE_SCRIPT_URL, {
@@ -806,6 +864,35 @@
     document.getElementById("noHp").addEventListener("input", function () {
       this.value = this.value.replace(/[^0-9+]/g, "");
     });
+
+    /* ============================
+   FITUR RATING BINTANG
+============================ */
+let selectedRating = 0;
+
+const stars = document.querySelectorAll(".rating-star");
+const ratingText = document.getElementById("ratingText");
+const ratingValueInput = document.getElementById("ratingValue");
+
+stars.forEach((star) => {
+  star.addEventListener("click", () => {
+    selectedRating = star.getAttribute("data-value");
+
+    // Update input hidden
+    ratingValueInput.value = selectedRating;
+
+    // Update tampilan bintang
+    stars.forEach((s) => {
+      s.classList.remove("active");
+      if (s.getAttribute("data-value") <= selectedRating) {
+        s.classList.add("active");
+      }
+    });
+
+    ratingText.textContent = `Rating diberikan: ${selectedRating} ⭐`;
+  });
+});
+
   </script>
 </body>
 
